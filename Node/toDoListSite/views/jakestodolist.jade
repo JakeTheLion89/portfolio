@@ -1,0 +1,14 @@
+extend layout
+
+block content
+    h1= title
+    ul
+        if(todo.length > 0)
+            each task,t in todo
+                li
+                    h4 #{task.requester} #{task.day_posted} #{task.time_posted}
+                    p= task.description
+                    form#doneform(value="#{task._id}",method="post",action="/confirmdone/#{task._id}")
+                        button#btnSubmit(type="submit") Send It!
+        else
+            p You got nothing to do!

@@ -1,0 +1,10 @@
+extends layout
+
+block content
+    h1.
+        About Us
+    ul
+        each member, i in familylist
+            li
+               p=  member.name
+               p=  member.todo[0].description

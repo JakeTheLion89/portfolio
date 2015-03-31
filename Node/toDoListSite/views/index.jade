@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  h1 Leonen Network Home
+  p This is the Leonen Family Network
+  p Feel free to use our WiFi and the apps below
+  div(name="Jake's Todo", style="width:90%; border:1px solid black; padding:10px")
+    h2 Jake's To Do List
+    p Jake checks this site out every day. Send him a reminder to do something
+    form#formAddReminder(style="width:40%",name="addReminder", method="post", action="/confirmaddreminder")
+      input#formRequester(name="requester", placeholder="Your Name")
+      br
+      br
+      textarea#inputReminder(style="width:400px; height:100px",placeholder="Put in something you want Jake to do",name="reminder")
+      br
+      button#btnSubmit(type="submit") Send It!
+    div(style="width:40%;height:300px; overflow-y:scroll")
+      h2 Do These Things Jake
+      ul
+        each task, t in todo
+            li
+               h4 #{task.requester} #{task.day_posted} #{task.time_posted}
+               p= task.description
+
+  p(style="font-size:10px") Website made by Jake Leonen 2014

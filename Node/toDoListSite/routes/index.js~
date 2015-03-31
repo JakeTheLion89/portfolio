@@ -1,0 +1,50 @@
+var express = require('express');
+var router = express.Router();
+
+/* GET home page. */
+router.get('/', function(req, res) {
+  res.render('index', { title: 'Express' });
+});
+
+router.get('/helloworld',function(req,res){
+    res.render('helloworld',{title:'Hello World'});
+});
+
+router.get('/aboutus',function(req,res){
+    var db = req.db;
+    var collection = db.get('family');
+    collection.find({},{},function(e,docs){
+        console.log(docs);
+        res.render('About Us',{"familylist":docs});
+    });
+});
+
+router.get('/addreminder',function(req,res){
+    res.render('addreminder',{title:'Add Reminder'});
+});
+
+router.post('/confirmaddreminder', function(req,res){
+    var db = req.db;
+    var reminder = req.body.reminder;
+    var collection = db.get('family');
+
+    var reminderObj = {
+	title:"Testing",
+	description:reminder,
+	date_posted:"12/25/2014",
+	date_due:"12/25/2014",
+	requester:"Mom"
+    };
+
+    collection.update({'name':"Jake"},{$push:{todo:reminderObj}},
+		      function(err,doc){
+			  if (err){
+			      res.send("OOPS \n We screwed up")
+			  }else{
+			      res.location("aboutus");
+			      res.redirect("aboutus");
+			  };
+		      });
+);
+
+module.exports = router;

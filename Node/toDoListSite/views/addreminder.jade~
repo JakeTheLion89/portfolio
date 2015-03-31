@@ -1,0 +1,7 @@
+extend layout
+
+block content
+    h1= title
+    form#formAddReminder(name="addReminder",method="post",action="/addReminder")
+        input#inputReminder(type="text",style="width:400px; height:100px",placeholder="Put in something you want Jake to do",name="reminder")
+        button#btnSubmit(type="submit") Send It!
