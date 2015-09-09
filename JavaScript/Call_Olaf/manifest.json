@@ -1,0 +1,14 @@
+{
+    "manifest_version" : 2,
+
+    "name" : "Olaf",
+    "description" : "Make Olaf appear on your screen",
+    "version" : "1.0",
+    "browser_action" : {
+        "default_icon" : "olaf_1.png",
+        "default_popup" : "popup.html"
+    },
+    "permissions" : [
+        "tabs", "http://*/*", "https://*/*","activeTab"
+    ]
+}
