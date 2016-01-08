@@ -4,8 +4,8 @@
 
 using namespace std;
 
-bool binarysearch_function(vector<int> v_sub, int key);
-vector<int> int_bubblesort(vector<int> v_sub);
+bool binarysearch_function(vector<int> v_input, int key);
+vector<int> int_bubblesort(vector<int> v_input);
 
 int main()
 {
@@ -23,11 +23,11 @@ int main()
 
 };
 
-bool binarysearch_function(vector<int> sub_v, int key){
+bool binarysearch_function(vector<int> v_input, int key){
 
     // First initiate indexes for hi and lo
     int lo, hi = 0;
-    vector<int> v = sub_v;
+    vector<int> v = v_input;
 
     hi = v.size() - 1;
 
@@ -59,7 +59,7 @@ bool binarysearch_function(vector<int> sub_v, int key){
 }
 
 
-vector<int> int_bubblesort(vector<int> sub_v){
+vector<int> int_bubblesort(vector<int> v_input){
 
     /*
         Bubble sort
@@ -71,7 +71,7 @@ vector<int> int_bubblesort(vector<int> sub_v){
     */
     int i = 0;
 
-    vector<int> v = sub_v;
+    vector<int> v = v_input;
 
     for (i=0;i < v.size(); i++){
 
