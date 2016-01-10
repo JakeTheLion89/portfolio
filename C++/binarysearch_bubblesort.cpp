@@ -9,7 +9,7 @@ vector<int> int_bubblesort(vector<int> v_input);
 
 int main()
 {
-    int ints[10] = {1,2,18,6,7,23,9,12,53,99};
+    int ints[15] = {2,18,2,6,14,7,48,93,2,51,11,2,53,99,1};
     int user_input = 0;
 
     vector<int> intVector (ints, ints + sizeof(ints)/sizeof(int));
@@ -77,7 +77,7 @@ vector<int> int_bubblesort(vector<int> v_input){
 
         int j = 0;
 
-        for(j=0; j < v.size() - 1;j++){
+        for(j=0; j < v.size() - 1 - i ;j++){
 
             if(v[j] > v[j+1]){
 
@@ -89,5 +89,9 @@ vector<int> int_bubblesort(vector<int> v_input){
         };
     };
 
+    for (int i = 0; i < v.size(); i++)
+        cout << v[i] << ", ";
+
+    cout << '\n';
     return v;
 }
