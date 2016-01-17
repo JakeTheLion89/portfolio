@@ -18,11 +18,17 @@ std::ostream& operator << (std::ostream &output, const std::vector<T> &v_input){
 
 int main()
 {
-    std::vector<int> rand_ints;
+    std::vector<int> rand_ints,sorted_ints;
 
-    rand_ints = generate_integers(1000,9999)
+    rand_ints = generate_integers(100,9999);
 
+    std::cout << rand_ints;
 
+    sorted_ints = td_mergesort(rand_ints);
+
+    std::cout << sorted_ints;
+
+    return 0;
 }
 
 std::vector<int> generate_integers(int range_input, int max){
@@ -41,6 +47,34 @@ std::vector<int> generate_integers(int range_input, int max){
     return output;
 }
 
+std::vector<int> merge(std::vector<int> l_vector, std::vector<int> r_vector){
+    std::vector<int> result;
+
+    result.reserve(l_vector.size() + r_vector.size());
+
+    while ((l_vector.size() > 0) && (r_vector.size() > 0)){
+        if (l_vector[0] <= r_vector[0]){
+            result.insert(result.end(),l_vector[0]);
+            l_vector.erase(l_vector.begin());
+        }
+        else{
+            result.insert(result.end(),r_vector[0]);
+            r_vector.erase(r_vector.begin());
+        }
+    }
+
+    if(l_vector.size() > 0){
+        result.insert(result.end(),l_vector.begin(), l_vector.end());
+    }
+
+    if(r_vector.size() > 0){
+        result.insert(result.end(),r_vector.begin(), r_vector.end());
+    }
+
+    // test this and explain how it works
+    return result;
+}
+
 std::vector<int> td_mergesort(std::vector<int> v){
 
     if (v.size() <= 1)
@@ -48,48 +82,15 @@ std::vector<int> td_mergesort(std::vector<int> v){
 
     std::vector<int> left, right;
 
-    for(int i = 0; i < v.size){
-        if (i%2 != 0)
+    for(int i = 0; i < v.size(); i++){
+        if (i < (v.size()/2))
             left.push_back(v[i]);
         else
             right.push_back(v[i]);
     };
 
-    td_mergesort(left);
-    td_mergesort(right);
+    left = td_mergesort(left);
+    right = td_mergesort(right);
 
     return merge(left,right);
-}
-
-std::vector<int> merge(std::vector<int> l_vector, std::vector<int> r_vector){
-    std::vector<int> result,container;
-
-    while ((l_vector.size() > 0) && ((r_vector.size() > 0)){
-        if l_vector[0] >= r_vector[0]{
-            container.insert(l_vector.begin(),l_vector[0]);
-            l_vector.erase(l_vector.begin());
-        }
-        else{
-            container.insert(r_vector.begin(),r_vector[0]);
-            r_vector.erase(r_vector.begin());
-        }
-    }
-
-    if(l_vector.size() > 0){
-        result.reserve(container.size() + l_vector.size());
-        result.insert(result.end(),container.begin(), container.end())
-        result.insert(result.end(),l_vector.begin(), l_vector.end())
-    }
-    if(r_vector.size() > 0){
-        result.reserve(container.size() + r_vector.size());
-        result.insert(result.end(),container.begin(), container.end())
-        result.insert(result.end(),r_vector.begin(), r_vector.end())
-    }
-
-    // test this and explain how it works
-    return result;
-}
-
-
-
 }
