@@ -3,7 +3,12 @@ var router = express.Router();
 var db = require('../db_config.js');
 var moment = require("moment");
 
-var counter = 0;
+
+router.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 router.post('/addComment', function(req, res, next) {
     comment = req.body.comment;
