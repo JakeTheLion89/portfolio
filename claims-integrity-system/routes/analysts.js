@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var db = require('../db_config.js')
+
 /* GET users listing. */
 router.get('/', function(req, res, next) {
   res.json({'message':'this is analysts api'});
