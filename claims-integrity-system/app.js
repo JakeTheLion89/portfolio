@@ -15,16 +15,6 @@ var app = express();
 var cors = require('cors')
 app.use(cors());
 
-//...
-app.configure(function() {
-    app.use(express.bodyParser());
-    app.use(express.cookieParser());
-    app.use(express.session({ secret: 'cool beans' }));
-    app.use(express.methodOverride());
-    app.use(allowCrossDomain);
-    app.use(app.router);
-    app.use(express.static(__dirname + '/public'));
-});
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
