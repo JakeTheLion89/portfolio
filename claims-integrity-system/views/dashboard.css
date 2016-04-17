@@ -2,6 +2,87 @@
  * Globals
  */
 
+ body {
+   padding-top: 50px;
+ }
+ .starter-template {
+   padding: 40px 15px;
+   text-align: center;
+ }
+#circle-image{
+    width:200px;
+    height:200px;
+    margin: 0 auto;
+    border-radius:50%;
+    background-image:url("../images/my-face.jpg");
+    display:block;
+    background-position: center;
+    background-size: 95%
+}
+
+#circle-image-school{
+    width:200px;
+    height:200px;
+    margin: 0 auto;
+    border-radius:50%;
+    background-image:url("../images/baruch.jpg");
+    display:block;
+    background-position: center;
+    background-size: 95%
+}
+
+.langlogo{
+    width:8.5em;
+    height:8.5em;
+}
+
+.langs{
+    list-style-type: none;
+}
+
+.langs li{
+    display: inline;
+}
+
+#small-col{
+    text-align: center;
+    display: inline;
+}
+
+#first-row{
+    height:20%;
+    margin-bottom:10%;
+    align-items: center;
+}
+
+#second-row{
+    height: 20%;
+    text-align : center;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+#third-row{
+    height:20%;
+    margin-bottom:10%;
+    text-align:center;
+}
+.website-tools{
+    list-style-type: none;
+}
+
+.website-tools li{
+    display: inline;
+    margin-right: 5%;
+}
+.toollogo{
+    width: 15em;
+    height: 15em;
+    margin-bottom: 5%;
+}
+
+.reading-list li{
+    list-style-type: none;
+}
 body {
   font-family: Georgia, "Times New Roman", Times, serif;
   color: #555;
