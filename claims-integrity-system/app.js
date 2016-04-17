@@ -12,12 +12,18 @@ var management = require('./routes/management');
 var docmaker = require('./routes/docmaker');
 
 var app = express();
+var cors = require('cors')
+app.use(cors());
 
-
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
+//...
+app.configure(function() {
+    app.use(express.bodyParser());
+    app.use(express.cookieParser());
+    app.use(express.session({ secret: 'cool beans' }));
+    app.use(express.methodOverride());
+    app.use(allowCrossDomain);
+    app.use(app.router);
+    app.use(express.static(__dirname + '/public'));
 });
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
