@@ -1,4 +1,4 @@
-
+var empId = '1'
 
 function loadDoc() {
   var xhttp = new XMLHttpRequest();
@@ -29,20 +29,32 @@ function loadDoc() {
   xhttp.open("POST", "http://ec2-54-87-167-86.compute-1.amazonaws.com:13000/analysts/reqAnalystClaims", true);
   xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
   xhttp.setRequestHeader("Access-Control-Allow-Origin","*");
-  xhttp.send('{"analystId":"1"}');
+  xhttp.send(JSON.stringify({analystId:empId}));
 }
 
 function getClaimEvents(claimId){
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
-            var claimEvents = document.getElementById("events-list");
+            var claimEvents = document.getElementById("claim-events");
             claimEvents.innerHTML = ""
             var eventData = JSON.parse(xhttp.responseText);
             console.log(eventData);
             var groupOfEvents = document.createElement("div")
             groupOfEvents.setAttribute("class","list-group")
             claimEvents.appendChild(groupOfEvents)
+
+            for(var i = 0; i < eventData.length; i++){
+                var entry = document.createElement("a");
+                entry.setAttribute("class", "list-group-item");
+                var commenterId = document.createTextNode("CommenterID:"+ eventData[i].employee_id);
+                var comment = document.createTextNode("Comment:" + eventData[i].comment);
+
+                entry.appendChild(commenterId);
+                entry.appendChild(document.createElement("br"));
+                entry.appendChild(comment);
+                groupOfEvents.appendChild(entry);
+            }
         };
     };
     xhttp.open("POST", "http://ec2-54-87-167-86.compute-1.amazonaws.com:13000/eventlog/getEvents", true);
@@ -64,12 +76,12 @@ function getClaimInfo(claimId){
             var table = document.createElement("TABLE");
             table.setAttribute('id','claimInfoTable');
             document.getElementById('claim-info').appendChild(table)
-            var claimData = claimData.claim;
-            console.log(claimData)
+            var claim = claimData.claim;
+            console.log(claim)
             //var keys = Object.keys(claimData)
             var keys = [];
 
-            for(var k in claimData) keys.push(k);
+            for(var k in claim) keys.push(k);
             console.log(keys)
 
             for(var i = 0; i < keys.length; i++){
@@ -79,10 +91,14 @@ function getClaimInfo(claimId){
                 cell1.innerHTML = keys[i]
                 row.appendChild(cell1);
                 var cell2 = document.createElement('td');
-                cell2.innerHTML = claimData[keys[i]]
+                cell2.innerHTML = claim[keys[i]]
                 row.appendChild(cell2);
             };
             getClaimEvents(claimId)
+
+            var commentButton = document.getElementById('comment-poster');
+            commentButton.setAttribute('onclick','postComment('+ claim.id +')')
+
         };
     }
 
@@ -104,6 +120,7 @@ function getClaimsEvents(claimId){
             console.log(eventData);
             var groupOfEvents = document.createElement("div")
             groupOfEvents.setAttribute("class","list-group")
+            groupOfEvents.setAttribute("id","group-of-events")
             claimEvents.appendChild(groupOfEvents)
         };
     };
@@ -112,4 +129,41 @@ function getClaimsEvents(claimId){
     xhttp.setRequestHeader("Access-Control-Allow-Origin","*");
     var jsonData = {'claimId': claimId}
     xhttp.send(JSON.stringify(jsonData));
+}
+
+function postComment(claimId){
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function() {
+        if (xhttp.readyState == 4 && xhttp.status == 200){
+            console.log(xhttp.responseText)
+        }
+    };
+
+    xhttp.open("POST", "http://ec2-54-87-167-86.compute-1.amazonaws.com:13000/eventlog/addComment", true);
+    xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xhttp.setRequestHeader("Access-Control-Allow-Origin","*");
+
+    var comment = document.getElementById('comment-input').value
+
+    var jsonData = {
+        comment:comment,
+        analystId:empId,
+        claimId:claimId
+    }
+
+    console.log(jsonData)
+
+    xhttp.send(JSON.stringify(jsonData));
+
+    var groupOfEvents = document.getElementsByClassName('list-group')
+    var entry = document.createElement("a");
+    entry.setAttribute("class", "list-group-item");
+    var commenterId = document.createTextNode("CommenterID:"+ jsonData.analystId);
+    var comment = document.createTextNode("Comment:" + jsonData.comment);
+
+    entry.appendChild(commenterId);
+    entry.appendChild(document.createElement("br"))
+    entry.appendChild(comment);
+    groupOfEvents[0].appendChild(entry);
 }

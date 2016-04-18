@@ -34,7 +34,7 @@
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li id="Name"><a href="#">Employee Name</a></li>
-            <li><a href="#about"></a></li>
+            <li><a href="employee-id">1</a></li>
             <li><a href="#contact"></a></li>
             <li><a href="#blog"></a></li>
           </ul>
@@ -53,6 +53,13 @@
           </div>
           <div class=col-sm-4 id=small-col>
             <h2>EventLog</h2>
+            <form role="form">
+                <div class="form-group">
+                    <label for="comment">Comment Here:</label>
+                    <input type="comment" class="form-control" id="comment-input">
+                </div>
+                <button id='comment-poster' type="button" class="btn btn-default">Submit</button>
+            </form>
             <div id="claim-events"></div>
           </div>
       </div>
