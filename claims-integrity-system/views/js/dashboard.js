@@ -29,7 +29,27 @@ function loadDoc() {
   xhttp.open("POST", "http://ec2-54-87-167-86.compute-1.amazonaws.com:13000/analysts/reqAnalystClaims", true);
   xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
   xhttp.setRequestHeader("Access-Control-Allow-Origin","*");
-  xhttp.send('{"analystId":"2"}');
+  xhttp.send('{"analystId":"1"}');
+}
+
+function getClaimEvents(claimId){
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+            var claimEvents = document.getElementById("events-list");
+            claimEvents.innerHTML = ""
+            var eventData = JSON.parse(xhttp.responseText);
+            console.log(eventData);
+            var groupOfEvents = document.createElement("div")
+            groupOfEvents.setAttribute("class","list-group")
+            claimEvents.appendChild(groupOfEvents)
+        };
+    };
+    xhttp.open("POST", "http://ec2-54-87-167-86.compute-1.amazonaws.com:13000/eventlog/getEvents", true);
+    xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xhttp.setRequestHeader("Access-Control-Allow-Origin","*");
+    var jsonData = {'claimId': claimId}
+    xhttp.send(JSON.stringify(jsonData));
 }
 
 function getClaimInfo(claimId){
@@ -62,7 +82,7 @@ function getClaimInfo(claimId){
                 cell2.innerHTML = claimData[keys[i]]
                 row.appendChild(cell2);
             };
-
+            getClaimEvents(claimId)
         };
     }
 
@@ -72,4 +92,24 @@ function getClaimInfo(claimId){
     var jsonData = {'claimId': claimId}
     xhttp.send(JSON.stringify(jsonData));
 
+}
+
+function getClaimsEvents(claimId){
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+            var claimEvents = document.getElementById("events-list");
+            claimEvents.innerHTML = ""
+            var eventData = JSON.parse(xhttp.responseText);
+            console.log(eventData);
+            var groupOfEvents = document.createElement("div")
+            groupOfEvents.setAttribute("class","list-group")
+            claimEvents.appendChild(groupOfEvents)
+        };
+    };
+    xhttp.open("POST", "http://ec2-54-87-167-86.compute-1.amazonaws.com:13000/eventlog/getEvents", true);
+    xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xhttp.setRequestHeader("Access-Control-Allow-Origin","*");
+    var jsonData = {'claimId': claimId}
+    xhttp.send(JSON.stringify(jsonData));
 }

@@ -41,7 +41,7 @@ router.post('/getEvents',function(req,res, err){
 router.post('/deleteEvent', function(req,res,err){
     var eventId = req.body.eventId;
 
-    db.raw("delete from events where event_id = " + eventId)
+    db.raw("delete from event where event_id = " + eventId)
     .then(function(confirmation){
         json.send({"message":"confirmed delete"});
     });
