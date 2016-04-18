@@ -29,4 +29,23 @@ router.post('/reqAnalystClaims',function(req,res,err){
   })
 });
 
+
+router.post('/getFullClaimData',function(req, res, err){
+    var claimId = req.body.claimId;
+    var sql1 = 'select * from claim where id ='+claimId;
+    db.raw(sql1)
+    .then(function(payload){
+        var payloadClaim = payload.rows[0]
+        var sql2 = 'select * from provider where id = ' + payloadClaim.provider_id
+        db.raw(sql2)
+        .then(function(payload2){
+            var claimsData = {
+                'claim' : payloadClaim,
+                'provider' : payload2.rows[0]
+            }
+            res.json(claimsData);
+        })
+    })
+});
+
 module.exports = router;
