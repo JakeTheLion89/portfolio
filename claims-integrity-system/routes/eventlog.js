@@ -28,4 +28,24 @@ router.post('/addComment', function(req, res, next) {
     });
 });
 
+router.post('/getEvents',function(req,res, err){
+    var claimId = req.body.claimId;
+
+    db.raw(
+        "select * from events where claim_id = " + claimId
+    ).then(function(payload){
+        json.send(payload.rows);
+    });
+})
+
+router.post('/deleteEvent', function(req,res,err){
+    var eventId = req.body.eventId;
+
+    db.raw("delete from events where event_id = " + eventId)
+    .then(function(confirmation){
+        json.send({"message":"confirmed delete"});
+    });
+});
+
+
 module.exports = router;
