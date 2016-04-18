@@ -34,7 +34,7 @@ router.post('/getEvents',function(req,res, err){
     db.raw(
         "select * from event where claim_id = " + claimId
     ).then(function(payload){
-        json.send(payload.rows);
+        res.json(payload.rows);
     });
 })
 
