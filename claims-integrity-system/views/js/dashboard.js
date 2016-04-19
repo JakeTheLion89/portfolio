@@ -1,4 +1,6 @@
 var empId = '2'
+var apiUrl = "http://ec2-52-23-199-112.compute-1.amazonaws.com"
+
 
 function loadDoc() {
   var xhttp = new XMLHttpRequest();
@@ -26,7 +28,7 @@ function loadDoc() {
 
     }
   };
-  xhttp.open("POST", "http://ec2-54-87-167-86.compute-1.amazonaws.com:13000/analysts/reqAnalystClaims", true);
+  xhttp.open("POST", apiUrl + ":13000/analysts/reqAnalystClaims", true);
   xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
   xhttp.setRequestHeader("Access-Control-Allow-Origin","*");
   xhttp.send(JSON.stringify({analystId:empId}));
@@ -57,7 +59,7 @@ function getClaimEvents(claimId){
             }
         };
     };
-    xhttp.open("POST", "http://ec2-54-87-167-86.compute-1.amazonaws.com:13000/eventlog/getEvents", true);
+    xhttp.open("POST", apiUrl + ":13000/eventlog/getEvents", true);
     xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xhttp.setRequestHeader("Access-Control-Allow-Origin","*");
     var jsonData = {'claimId': claimId}
@@ -102,7 +104,7 @@ function getClaimInfo(claimId){
         };
     }
 
-    xhttp.open("POST", "http://ec2-54-87-167-86.compute-1.amazonaws.com:13000/analysts/getFullClaimData", true);
+    xhttp.open("POST", apiUrl + ":13000/analysts/getFullClaimData", true);
     xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xhttp.setRequestHeader("Access-Control-Allow-Origin","*");
     var jsonData = {'claimId': claimId}
@@ -119,7 +121,7 @@ function postComment(claimId){
         }
     };
 
-    xhttp.open("POST", "http://ec2-54-87-167-86.compute-1.amazonaws.com:13000/eventlog/addComment", true);
+    xhttp.open("POST", apiUrl + ":13000/eventlog/addComment", true);
     xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xhttp.setRequestHeader("Access-Control-Allow-Origin","*");
 
@@ -128,6 +130,31 @@ function postComment(claimId){
     var jsonData = {
         comment:comment,
         analystId:empId,
+        claimId:claimId
+    }
+
+    console.log(jsonData)
+
+    xhttp.send(JSON.stringify(jsonData));
+}
+
+
+function deleteAllClaimEvents(claimId){
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function() {
+        if (xhttp.readyState == 4 && xhttp.status == 200){
+            getClaimEvents(claimId);
+        }
+    };
+
+    xhttp.open("POST", apiUrl + ":13000/eventlog/deleteAllClaimEvents", true);
+    xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xhttp.setRequestHeader("Access-Control-Allow-Origin","*");
+
+    var comment = document.getElementById('comment-input').value
+
+    var jsonData = {
         claimId:claimId
     }
 

@@ -47,5 +47,14 @@ router.post('/deleteEvent', function(req,res,err){
     });
 });
 
+router.post('/deleteAllClaimEvents', function(req,res,err){
+    var claimId = req.body.claimId;
+
+    db.raw("delete from event where claim_id = " + claimId)
+    .then(function(confirmation){
+        json.send({"message":"confirmed delete"});
+    });
+});
+
 
 module.exports = router;
