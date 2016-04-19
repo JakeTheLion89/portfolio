@@ -52,7 +52,7 @@ router.post('/deleteAllClaimEvents', function(req,res,err){
 
     db.raw("delete from event where claim_id = " + claimId)
     .then(function(confirmation){
-        json.send({"message":"confirmed delete"});
+        res.json({"message":"confirmed delete"});
     });
 });
 

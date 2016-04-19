@@ -99,7 +99,9 @@ function getClaimInfo(claimId){
             getClaimEvents(claimId)
 
             var commentButton = document.getElementById('comment-poster');
+            var deleteButton = document.getElementById('comment-deleter')
             commentButton.setAttribute('onclick','postComment('+ claim.id +')')
+            deleteButton.setAttribute('onclick','deleteAllClaimEvents('+ claim.id +')')
 
         };
     }
