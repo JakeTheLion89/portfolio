@@ -1,4 +1,4 @@
-var empId = '1'
+var empId = '2'
 
 function loadDoc() {
   var xhttp = new XMLHttpRequest();
@@ -110,33 +110,12 @@ function getClaimInfo(claimId){
 
 }
 
-function getClaimsEvents(claimId){
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (xhttp.readyState == 4 && xhttp.status == 200) {
-            var claimEvents = document.getElementById("events-list");
-            claimEvents.innerHTML = ""
-            var eventData = JSON.parse(xhttp.responseText);
-            console.log(eventData);
-            var groupOfEvents = document.createElement("div")
-            groupOfEvents.setAttribute("class","list-group")
-            groupOfEvents.setAttribute("id","group-of-events")
-            claimEvents.appendChild(groupOfEvents)
-        };
-    };
-    xhttp.open("POST", "http://ec2-54-87-167-86.compute-1.amazonaws.com:13000/eventlog/getEvents", true);
-    xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    xhttp.setRequestHeader("Access-Control-Allow-Origin","*");
-    var jsonData = {'claimId': claimId}
-    xhttp.send(JSON.stringify(jsonData));
-}
-
 function postComment(claimId){
     var xhttp = new XMLHttpRequest();
 
     xhttp.onreadystatechange = function() {
         if (xhttp.readyState == 4 && xhttp.status == 200){
-            console.log(xhttp.responseText)
+            getClaimEvents(claimId);
         }
     };
 
@@ -155,15 +134,4 @@ function postComment(claimId){
     console.log(jsonData)
 
     xhttp.send(JSON.stringify(jsonData));
-
-    var groupOfEvents = document.getElementsByClassName('list-group')
-    var entry = document.createElement("a");
-    entry.setAttribute("class", "list-group-item");
-    var commenterId = document.createTextNode("CommenterID:"+ jsonData.analystId);
-    var comment = document.createTextNode("Comment:" + jsonData.comment);
-
-    entry.appendChild(commenterId);
-    entry.appendChild(document.createElement("br"))
-    entry.appendChild(comment);
-    groupOfEvents[0].appendChild(entry);
 }
