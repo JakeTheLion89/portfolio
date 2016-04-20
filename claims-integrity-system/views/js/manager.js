@@ -180,11 +180,9 @@ function assignClaimToAnalyst(claimId){
     var analystId = document.getElementById('assigned-analyst-id').value
 
     var jsonData = {
-        claimId:claimId,
+        claimId:claimId.toString(),
         analystId:analystId
     };
+    console.log(JSON.stringify(jsonData))
 
-    console.log(jsonData)
-
-    xhttp.send(JSON.stringify(jsonData));
 }

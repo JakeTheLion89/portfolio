@@ -12,7 +12,7 @@ router.get('/getAllClaims', function(req, res, next) {
 
 router.post('/assignClaimToAnalyst', function(req,res,next){
     var claimId = req.body.claimId;
-    var analystId = req.body.claimId;
+    var analystId = req.body.analystId;
 
     var sql = 'update claim set analyst_employee_id = ' + analystId +
               'where id = ' + claimId;
