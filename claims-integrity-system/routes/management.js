@@ -11,6 +11,7 @@ router.get('/getAllClaims', function(req, res, next) {
   });
 
 router.post('/assignClaimToAnalyst', function(req,res,next){
+    console.log(req.body)
     var claimId = req.body.claimId;
     var analystId = req.body.analystId;
 
