@@ -178,7 +178,7 @@ function assignClaimToAnalyst(claimId){
 
 
     var analystId = document.getElementById('assigned-analyst-id').value
-    document.getElementById('comment-input').value = ''
+    document.getElementById('assigned-analyst-id').value = ''
     var jsonData = {
         'claimId':claimId,
         'analystId':analystId
