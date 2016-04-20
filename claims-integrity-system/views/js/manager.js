@@ -29,7 +29,7 @@ function loadDoc() {
 
     }
   };
-  xhttp.open("POST", apiUrl + ":13000/management/getAllClaims", true);
+  xhttp.open("get", apiUrl + ":13000/management/getAllClaims", true);
   xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
   xhttp.setRequestHeader("Access-Control-Allow-Origin","*");
   xhttp.send(JSON.stringify({analystId:empId}));

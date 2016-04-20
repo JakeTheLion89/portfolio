@@ -3,7 +3,7 @@ var router = express.Router();
 var db = require('../db_config.js')
 
 router.get('/getAllClaims', function(req, res, next) {
-    var sql = 'select * from claims';
+    var sql = 'select * from claim';
     db.raw(sql).then(function(payload){
         res.json(payload.rows)
     })
