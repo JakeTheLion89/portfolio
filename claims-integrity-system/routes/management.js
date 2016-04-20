@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
-router.get('/', function(req, res, next) {
-  res.json({'message':'this is the document maker api'});
-});
+router.get('/prototype', function(req, res, next) {
+  res.sendFile(path.join(__dirname + '/../views/managerPrototype.html'))
+  });
 
 module.exports = router;
