@@ -3,13 +3,13 @@ var router = express.Router();
 var path = require('path');
 
 router.get('/:role', function(req, res, next) {
-    role = req.params.role
+    var role = req.params.role;
+    var htmlFile = null;
     if(role == 'manager'){
-       var htmlFile = path.join(__dirname, '..', 'views','managerPrototype.html')
-       console.log(htmlFile);
-       res.sendFile(htmlFile);
+       htmlFile = path.join(__dirname, '..', 'views','managerPrototype.html')
    } else if (role == 'analyst') {
-       res.json({dame:'dan'});    
+       htmlFile = path.join(__dirname, '..', 'views','analystPrototype.html')
+
     }
   });
 
