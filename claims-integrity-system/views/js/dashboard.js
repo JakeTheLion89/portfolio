@@ -38,8 +38,13 @@ function getClaimEvents(claimId){
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
-            var claimEvents = document.getElementById("claim-events");
+            // first clear slate and  make show interface
+            // to change claim's responsible analystId
             claimEvents.innerHTML = ""
+            
+
+            var claimEvents = document.getElementById("claim-events");
+
             var eventData = JSON.parse(xhttp.responseText);
             console.log(eventData);
             var groupOfEvents = document.createElement("div")

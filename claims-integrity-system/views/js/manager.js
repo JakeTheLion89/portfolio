@@ -25,10 +25,8 @@ function loadDoc() {
             entry.appendChild(claimRequester);
             groupOfClaims.appendChild(entry);
         }
-
-
     }
-  };
+  }
   xhttp.open("get", apiUrl + ":13000/management/getAllClaims", true);
   xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
   xhttp.setRequestHeader("Access-Control-Allow-Origin","*");
@@ -101,9 +99,10 @@ function getClaimInfo(claimId){
 
             var commentButton = document.getElementById('comment-poster');
             var deleteButton = document.getElementById('comment-deleter')
+            var assignClaimButton = document.getElementById('assign-claim-button')
             commentButton.setAttribute('onclick','postComment('+ claim.id +')')
             deleteButton.setAttribute('onclick','deleteAllClaimEvents('+ claim.id +')')
-
+            assignClaimButton.setAttribute('onclick','assignClaimToAnalyst('+claim.id +')')
         };
     }
 
@@ -160,6 +159,30 @@ function deleteAllClaimEvents(claimId){
     var jsonData = {
         claimId:claimId
     }
+
+    console.log(jsonData)
+
+    xhttp.send(JSON.stringify(jsonData));
+}
+
+function assignClaimToAnalyst(claimId){
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function(){
+        getClaimInfo(claimId);
+    }
+
+    xhttp.open("POST", apiUrl + ":13000/management/assignClaimToAnalyst", true);
+    xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xhttp.setRequestHeader("Access-Control-Allow-Origin","*");
+    xhttp.send(JSON.stringify(jsonData));
+
+    var analystId = document.getElementById('assigned-analyst-id').value
+
+    var jsonData = {
+        claimId:claimId,
+        analystId:analystId
+    };
 
     console.log(jsonData)
 
