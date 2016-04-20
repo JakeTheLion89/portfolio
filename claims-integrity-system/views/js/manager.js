@@ -128,7 +128,7 @@ function postComment(claimId){
     xhttp.setRequestHeader("Access-Control-Allow-Origin","*");
 
     var comment = document.getElementById('comment-input').value
-
+    document.getElementById('comment-input').value = ''
     var jsonData = {
         comment:comment,
         analystId:empId,
@@ -175,14 +175,14 @@ function assignClaimToAnalyst(claimId){
     xhttp.open("POST", apiUrl + ":13000/management/assignClaimToAnalyst", true);
     xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xhttp.setRequestHeader("Access-Control-Allow-Origin","*");
-    xhttp.send(JSON.stringify(jsonData));
+
 
     var analystId = document.getElementById('assigned-analyst-id').value
-
+    document.getElementById('comment-input').value = ''
     var jsonData = {
-        claimId:claimId,
-        analystId:analystId
+        'claimId':claimId,
+        'analystId':analystId
     };
     console.log(JSON.stringify(jsonData))
-
+    xhttp.send(JSON.stringify(jsonData));
 }

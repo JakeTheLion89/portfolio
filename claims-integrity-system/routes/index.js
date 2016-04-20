@@ -9,8 +9,8 @@ router.get('/:role', function(req, res, next) {
        htmlFile = path.join(__dirname, '..', 'views','managerPrototype.html')
    } else if (role == 'analyst') {
        htmlFile = path.join(__dirname, '..', 'views','analystPrototype.html')
-
-    }
-  });
+   }
+   res.sendFile(htmlFile)
+);
 
 module.exports = router;

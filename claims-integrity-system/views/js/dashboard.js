@@ -40,10 +40,9 @@ function getClaimEvents(claimId){
         if (xhttp.readyState == 4 && xhttp.status == 200) {
             // first clear slate and  make show interface
             // to change claim's responsible analystId
-            claimEvents.innerHTML = ""
-            
 
             var claimEvents = document.getElementById("claim-events");
+            claimEvents.innerHTML = ''
 
             var eventData = JSON.parse(xhttp.responseText);
             console.log(eventData);
@@ -133,6 +132,7 @@ function postComment(claimId){
     xhttp.setRequestHeader("Access-Control-Allow-Origin","*");
 
     var comment = document.getElementById('comment-input').value
+    document.getElementById('comment-input').value = ''
 
     var jsonData = {
         comment:comment,
