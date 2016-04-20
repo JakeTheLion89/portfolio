@@ -6,7 +6,8 @@ var db = require('../db_config.js')
 /* GET users listing. */
 
 router.get('/prototype', function(req, res, next) {
-  res.sendFile(path.join(__dirname + '/../views/analystPrototype.html'))
+  console.log(__dirname+'../views/analystPrototype.html');
+  res.sendFile(path.join(__dirname + '../views/analystPrototype.html'))
   });
 
 
