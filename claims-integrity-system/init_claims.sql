@@ -37,12 +37,13 @@ INSERT INTO provider(first_name, last_name, address, phone_number,tax_id_number,
 );
 */
 
+
 INSERT INTO employee(
     first_name,last_name,address,home_phone_number, work_phone_number,
     cell_phone_number,type, manager_id
 ) VALUES (
-    'Sarah', 'Ahmadi', '2543 Ave. Q \n Brooklyn, New York',
-    '5553235324','555633536','555122347', 'analyst', 1
+    'Jacob', 'Feliciano', '254 Ave. J \n Brooklyn, New York',
+    '5552343324','5556253136','5553452347', 'analyst', 1
 );
 
 /*
@@ -61,18 +62,18 @@ INSERT INTO claim( provider_id, member_id, analyst_employee_id,
        tin_suffix, amount_to_be_recovered,original_amount,
        readjudicated_amount, requester, control_category) VALUES (
     1,
-    4253234,
+    13343234,
     2,
     1,
-    'Craig',
-    'Franz',
+    'Steve',
+    'Greenburg',
     '2016-02-1 00:00:00',
     'Internal Audit',
     'Overpayment to provider',
     'EKG procedure cost $400 less than originally approved',
     'testing',
     'diagonistics',
-    'PPO',
+    'HMO',
     'false',
     '2016-02-10 00:00:00',
     NULL,
@@ -84,6 +85,6 @@ INSERT INTO claim( provider_id, member_id, analyst_employee_id,
     400.00,
     900.00,
     500.00,
-    'Marty Rhodes',
+    'Rocky Balboa',
     'incorrect payment'
 );

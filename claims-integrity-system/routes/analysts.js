@@ -54,4 +54,34 @@ router.post('/getFullClaimData',function(req, res, err){
     })
 });
 
+router.post('/createRefund',function(req,res,err){
+    var claimId = req.body.claimId;
+    var refundAmt = req.body.refundAmt.toString();
+    var refundObj = JSON.stringify(req.body.refundObj);
+    var claimStatus = req.body.claimStatus;
+    var authorId = req.body.employeeId;
+    var creationDate = moment().utc().format("YYYY-MM-DD hh:mm:ss")
+
+    // first update the claim on how much is still owed
+    var sql1 = "update claim set amount_to_be_recovered = " + refundAmt +
+               ", control_category = " + claimStatus +
+              " where id = " + claimId
+
+    db.raw(sql1
+    // then put in an event
+    .then(function(){
+        var sql2 = "insert into event (claim_id, comment, employee_id, type, creation_date, event_obj) "+
+        "values ("+ claimId +  ", '"+  comment + "', " + authorId + ", " +
+        "'comment', '" +  creation_date.toString() + "'," + refundObj + " )")
+    })
+    .then(function(){
+        var confirmation = {"message":true}
+        res.json(confirmation)
+    })
+
+})
+
+
+
+
 module.exports = router;

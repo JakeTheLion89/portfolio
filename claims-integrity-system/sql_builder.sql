@@ -27,7 +27,8 @@ CREATE TABLE event (
     comment	TEXT,
     employee_id	INTEGER,
     type	VARCHAR(20),
-    creation_date	TIMESTAMP
+    creation_date	TIMESTAMP,
+    event_obj JSONB
 );
 
 CREATE TABLE employee(

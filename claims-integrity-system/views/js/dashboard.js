@@ -1,3 +1,110 @@
+$(document).ready(function() {
+
+	//select all the a tag with name equal to modal
+	$('#make-refund').click(function(e) {
+		//Cancel the link behavior
+		e.preventDefault();
+		//Get the A tag
+		var id = $(this).attr('href');
+
+		//Get the screen height and width
+		var maskHeight = $(document).height();
+		var maskWidth = $(window).width();
+        var refundHeader = document.getElementById('Refund-Offset-Head')
+
+        var table = document.getElementById('claimInfoTable').rows
+        refundHeader.innerHTML = "Make Offset"
+
+        //refundHeader.value =
+		//Set height and width to mask to fill up the whole screen
+		$('#mask').css({'width':maskWidth,'height':maskHeight});
+
+		//transition effect
+		$('#mask').fadeIn(100);
+		//$('#mask').fadeTo("slow",0.8);
+
+		//Get the window height and width
+		var winH = $(window).height();
+		var winW = $(window).width();
+
+		//Set the popup window to center
+		$(id).css('top',  winH/2-$(id).height()/2);
+		$(id).css('left', winW/2-$(id).width()/2);
+
+		//transition effect
+		$(id).fadeIn(200);
+
+	});
+
+	//if close button is clicked
+	$('.window .close').click(function (e) {
+		//Cancel the link behavior
+		e.preventDefault();
+		$('#mask, .window').hide();
+	});
+
+	//if mask is clicked
+	$('#mask').click(function () {
+		$(this).hide();
+		$('.window').hide();
+	});
+
+
+	$('#make-offset').click(function(e) {
+		//Cancel the link behavior
+		e.preventDefault();
+		//Get the A tag
+		var id = $(this).attr('href');
+
+		//Get the screen height and width
+		var maskHeight = $(document).height();
+		var maskWidth = $(window).width();
+        var refundHeader = document.getElementById('Offset-Head')
+
+        var table = document.getElementById('claimInfoTable').rows
+        console.log(table[table.length-5].cells[1])
+        refundHeader.innerHTML = "Make Offset | Claim ID: "+ table[0].cells[1].innerHTML +"|Amount Owed: " + table[table.length-5].cells[1].innerHTML
+
+        //refundHeader.value =
+		//Set height and width to mask to fill up the whole screen
+		$('#mask').css({'width':maskWidth,'height':maskHeight});
+
+		//transition effect
+		$('#mask').fadeIn(100);
+		//$('#mask').fadeTo("slow",0.8);
+
+		//Get the window height and width
+		var winH = $(window).height();
+		var winW = $(window).width();
+
+		//Set the popup window to center
+		$(id).css('top',  winH/2-$(id).height()/2);
+		$(id).css('left', winW/2-$(id).width()/2);
+
+		//transition effect
+		$(id).fadeIn(200);
+
+	});
+
+	//if close button is clicked
+	$('.window #close').click(function (e) {
+		//Cancel the link behavior
+		e.preventDefault();
+		$('#mask, .window').hide();
+	});
+
+	//if mask is clicked
+	$('#mask').click(function () {
+		$(this).hide();
+		$('.window').hide();
+	});
+
+});
+
+
+
+
+
 var empId = '2'
 var apiUrl = "http://ec2-52-23-199-112.compute-1.amazonaws.com"
 
@@ -169,3 +276,24 @@ function deleteAllClaimEvents(claimId){
 
     xhttp.send(JSON.stringify(jsonData));
 }
+
+
+/*
+function createRefund(claimId){
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function(){
+        if (xhttp.readyState == 4 && xhttp.status == 200){
+            // do reaction stuff here
+        }
+    }
+    xhttp.open("POST", apiUrl + ":13000/analysts/createRefund", true);
+    xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xhttp.setRequestHeader("Access-Control-Allow-Origin","*");
+    var jsonData = {
+        'claimId': claimId,
+        'refundAmt' :
+    }
+    xhttp.send(JSON.stringify(jsonData));
+
+}
+*/
