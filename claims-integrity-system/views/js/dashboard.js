@@ -10,12 +10,12 @@ $(document).ready(function() {
 		//Get the screen height and width
 		var maskHeight = $(document).height();
 		var maskWidth = $(window).width();
-        var refundHeader = document.getElementById('Refund-Offset-Head')
-
+        var refundHeader = document.getElementById('Refund-Head')
+        var refundButton = document.getElementById('refund-submit')
         var table = document.getElementById('claimInfoTable').rows
-        refundHeader.innerHTML = "Make Offset"
+        refundHeader.innerHTML = "Make Refund"
 
-        //refundHeader.value =
+        refundButton.setAttribute('onclick','createRefund(' + table[0].cells[1].innerHTML +')')
 		//Set height and width to mask to fill up the whole screen
 		$('#mask').css({'width':maskWidth,'height':maskHeight});
 
@@ -59,13 +59,13 @@ $(document).ready(function() {
 		//Get the screen height and width
 		var maskHeight = $(document).height();
 		var maskWidth = $(window).width();
-        var refundHeader = document.getElementById('Offset-Head')
-
+        var offsetHeader = document.getElementById('Offset-Head')
+        var offsetButton = document.getElementById('offset-submit')
         var table = document.getElementById('claimInfoTable').rows
-        console.log(table[table.length-5].cells[1])
-        refundHeader.innerHTML = "Make Offset | Claim ID: "+ table[0].cells[1].innerHTML +"|Amount Owed: " + table[table.length-5].cells[1].innerHTML
 
-        //refundHeader.value =
+        offsetHeader.innerHTML = "Make Offset | Claim ID: "+ table[0].cells[1].innerHTML +"|Amount Owed: " + table[table.length-5].cells[1].innerHTML
+
+        offsetButton.setAttribute('onclick','createOffset('+ table[0].cells[1].innerHTML + ')')
 		//Set height and width to mask to fill up the whole screen
 		$('#mask').css({'width':maskWidth,'height':maskHeight});
 
@@ -103,12 +103,9 @@ $(document).ready(function() {
 
 
 
-
-
-var empId = '2'
 var apiUrl = "http://ec2-52-23-199-112.compute-1.amazonaws.com"
 
-
+var empId = 2
 function loadDoc() {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
@@ -241,6 +238,9 @@ function postComment(claimId){
     var comment = document.getElementById('comment-input').value
     document.getElementById('comment-input').value = ''
 
+    var table = document.getElementById('claimInfoTable').rows
+
+    var empId = table[3].cells[1].innerHTML
     var jsonData = {
         comment:comment,
         analystId:empId,
@@ -278,7 +278,6 @@ function deleteAllClaimEvents(claimId){
 }
 
 
-/*
 function createRefund(claimId){
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function(){
@@ -289,11 +288,50 @@ function createRefund(claimId){
     xhttp.open("POST", apiUrl + ":13000/analysts/createRefund", true);
     xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xhttp.setRequestHeader("Access-Control-Allow-Origin","*");
+
+    var refundAmt = document.getElementById('refund-form').elements['refund-amt'].value
+
+    var table = document.getElementById('claimInfoTable').rows
+    var empId = table[3].cells[1].innerHTML
+
     var jsonData = {
         'claimId': claimId,
-        'refundAmt' :
+        'refundAmt' : refundAmt,
+        'claimStatus' : "",
+        'authorId' : empId,
+        'refundObj': {'testing':'test'}
     }
-    xhttp.send(JSON.stringify(jsonData));
+
+    console.log(["testing", jsonData])
+
+    //xhttp.send(JSON.stringify(jsonData));
 
 }
-*/
+
+function createOffset(claimId){
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function(){
+        if (xhttp.readyState == 4 && xhttp.status == 200){
+            // do reaction stuff here
+        }
+    }
+    xhttp.open("POST", apiUrl + ":13000/analysts/createOffset", true);
+    xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xhttp.setRequestHeader("Access-Control-Allow-Origin","*");
+
+    var refundAmt = document.getElementById('refund-form').elements['refund-amt']
+
+    var table = document.getElementById('claimInfoTable').rows
+    var empId = table[3].cells[1].innerHTML
+
+    var jsonData = {
+        'claimId': claimId,
+        'claimStatus' : "offset"
+        'employeeId' : empId
+    }
+
+    console.log(["testing", jsonData])
+
+    //xhttp.send(JSON.stringify(jsonData));
+
+}

@@ -64,10 +64,10 @@ router.post('/createRefund',function(req,res,err){
 
     // first update the claim on how much is still owed
     var sql1 = "update claim set amount_to_be_recovered = " + refundAmt +
-               ", control_category = " + claimStatus +
+               ", refund_type = " + claimStatus +
               " where id = " + claimId
 
-    db.raw(sql1
+    db.raw(sql1)
     // then put in an event
     .then(function(){
         var sql2 = "insert into event (claim_id, comment, employee_id, type, creation_date, event_obj) "+
@@ -75,13 +75,22 @@ router.post('/createRefund',function(req,res,err){
         "'comment', '" +  creation_date.toString() + "'," + refundObj + " )")
     })
     .then(function(){
+        if (err){
+            var confirmation = {"message":true}
+            res.json(confirmation)
+        }
         var confirmation = {"message":true}
         res.json(confirmation)
     })
 
 })
 
-
+router.post('/createOffset',function(req,res,err){
+    var claimId = req.body.claimId;
+    var claimStatus = req.body.claimStatus;
+    var authorId = req.body.employeeId;
+     // work on this more latere
+})
 
 
 module.exports = router;
