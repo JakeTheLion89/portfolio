@@ -64,8 +64,8 @@ router.post('/createRefund',function(req,res,err){
 
     // first update the claim on how much is still owed
     var sql1 = "update claim set amount_to_be_recovered = " + refundAmt +
-               ", refund_type = " + claimStatus +
-              " where id = " + claimId
+               ", refund_type = '" + claimStatus +
+              "' where id = " + claimId
 
     db.raw(sql1)
     // then put in an event
@@ -93,8 +93,8 @@ router.post('/createOffset',function(req,res,err){
     var claimStatus = req.body.claimStatus;
     var authorId = req.body.employeeId;
 
-    var sql1 = "update claim set refund_type = " + claimStatus +
-               ", status = 'awaiting offset approval' "
+    var sql1 = "update claim set refund_type = '" + claimStatus +
+               "'', status = 'awaiting offset approval' "
               " where id = " + claimId
 
     db.raw(sql1)

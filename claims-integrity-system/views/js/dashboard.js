@@ -313,6 +313,7 @@ function createOffset(claimId){
     xhttp.onreadystatechange = function(){
         if (xhttp.readyState == 4 && xhttp.status == 200){
             // do reaction stuff here
+			console.log(xhttp.responseText);
         }
     }
     xhttp.open("POST", apiUrl + ":13000/analysts/createOffset", true);
@@ -332,6 +333,6 @@ function createOffset(claimId){
 
     console.log(["testing", jsonData])
 
-    //xhttp.send(JSON.stringify(jsonData));
+    xhttp.send(JSON.stringify(jsonData));
 
 }
