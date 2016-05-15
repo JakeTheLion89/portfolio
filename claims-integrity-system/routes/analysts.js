@@ -5,11 +5,6 @@ var moment = require('moment')
 
 /* GET users listing. */
 
-router.get('/prototype', function(req, res, next) {
-  console.log(__dirname+'../views/analystPrototype.html');
-  res.sendFile(path.join(__dirname + '../views/analystPrototype.html'))
-  });
-
 
 router.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");

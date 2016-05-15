@@ -7,9 +7,13 @@ router.get('/:role', function(req, res, next) {
     var htmlFile = null;
     if(role == 'manager'){
        htmlFile = path.join(__dirname, '..', 'views','managerPrototype.html')
-   } else if (role == 'analyst') {
+    } else if (role == 'analyst') {
        htmlFile = path.join(__dirname, '..', 'views','analystPrototype.html')
-   }
+   } else if (role == 'loginpage' ){
+       htmlFile = path.join(__dirname, '..', 'views','login.html')
+   } else if (role == 'manageOffsets')
+       htmlFile = path.join(__dirname, '..', 'views','manageOffsets.html')
+
    res.sendFile(htmlFile)
 });
 

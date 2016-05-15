@@ -78,5 +78,13 @@ router.post('/rejectOffset',function(req,res,next){
 
 })
 
+router.get('/reqOffsetClaims', function(res,res,next){
+    var sql = "select * from claims where status = 'waiting offset approval'";
+    db.raw(sql)
+    .then(function(payload){
+        res.json(payload.rows);
+    })
+})
+
 
 module.exports = router;

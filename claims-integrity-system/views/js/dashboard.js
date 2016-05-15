@@ -59,6 +59,43 @@ $(document).ready(function() {
 		//Get the screen height and width
 		var maskHeight = $(document).height();
 		var maskWidth = $(window).width();
+        var approvalHeader = document.getElementById('approval-head')
+        var approveButton = document.getElementById('approval-submit')
+		var rejectButton = document.getElementById('reject-submit')
+        var table = document.getElementById('claimInfoTable').rows
+
+        approvalHeader.innerHTML = "Offset Approval | Claim ID: "+ table[0].cells[1].innerHTML +"|Amount Owed: " + table[table.length-5].cells[1].innerHTML
+
+        approveButton.setAttribute('onclick','acceptOffset('+ table[0].cells[1].innerHTML + ')')
+		rejectButton.setAttribute('onclick','rejectOffset('+ table[0].cells[1].innerHTML + ')')
+		//Set height and width to mask to fill up the whole screen
+		$('#mask').css({'width':maskWidth,'height':maskHeight});
+
+		//transition effect
+		$('#mask').fadeIn(100);
+		//$('#mask').fadeTo("slow",0.8);
+
+		//Get the window height and width
+		var winH = $(window).height();
+		var winW = $(window).width();
+
+		//Set the popup window to center
+		$(id).css('top',  winH/2-$(id).height()/2);
+		$(id).css('left', winW/2-$(id).width()/2);
+
+		//transition effect
+		$(id).fadeIn(200);
+
+	});
+	$('#make-approval').click(function(e) {
+		//Cancel the link behavior
+		e.preventDefault();
+		//Get the A tag
+		var id = $(this).attr('href');
+
+		//Get the screen height and width
+		var maskHeight = $(document).height();
+		var maskWidth = $(window).width();
         var offsetHeader = document.getElementById('Offset-Head')
         var offsetButton = document.getElementById('offset-submit')
         var table = document.getElementById('claimInfoTable').rows
@@ -85,7 +122,6 @@ $(document).ready(function() {
 		$(id).fadeIn(200);
 
 	});
-
 	//if close button is clicked
 	$('.window #close').click(function (e) {
 		//Cancel the link behavior
@@ -344,4 +380,31 @@ function createOffset(claimId){
 
 function clearOnClick(){
 	document.getElementById('refund-form').elements['refund-amt'].value = ''
+}
+
+function loadOffsets(){
+	var xhttp = new XMLHttpRequest();
+ 	xhttp.onreadystatechange = function(){
+		if (xhttp.readyState == 4 && xhttp.status == 200){
+	        var claims = JSON.parse(xhttp.responseText)
+	        var groupOfClaims = document.createElement("div")
+	        groupOfClaims.setAttribute("class","list-group")
+	        document.getElementById("claims-list").appendChild(groupOfClaims)
+
+	        for( var i = 0; i < claims.length; i++){
+	            console.log(claims[0])
+	            var entry = document.createElement("a")
+	            entry.setAttribute("class", "list-group-item")
+	            entry.setAttribute("onclick","getClaimInfo("+ claims[i].id+")")
+	            var claimId = document.createTextNode("Claim ID:"+ claims[i].id)
+	            var claimRequester = document.createTextNode("Requester:" + claims[i].requester);
+	            entry.appendChild(claimId);
+	            entry.appendChild(document.createElement("br"))
+	            entry.appendChild(claimRequester);
+	            groupOfClaims.appendChild(entry);
+	        }
+		}
+	};
+	xhttp.open("GET", apiUrl + ":13000/management/reqOffsetClaims", true);
+	xhttp.send()
 }
