@@ -299,12 +299,11 @@ function createRefund(claimId){
         'refundAmt' : refundAmt,
         'claimStatus' : "",
         'authorId' : empId,
-        'refundObj': {'testing':'test'}
     }
 
     console.log(["testing", jsonData])
 
-    //xhttp.send(JSON.stringify(jsonData));
+    xhttp.send(JSON.stringify(jsonData));
 
 }
 
@@ -314,6 +313,8 @@ function createOffset(claimId){
         if (xhttp.readyState == 4 && xhttp.status == 200){
             // do reaction stuff here
 			console.log(xhttp.responseText);
+			getClaimEvents(claimId);
+			$('#mask, .window').hide();
         }
     }
     xhttp.open("POST", apiUrl + ":13000/analysts/createOffset", true);
