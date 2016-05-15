@@ -41,15 +41,19 @@ router.post('/approveOffset',function(req,res,next){
         var sql2 = "insert into event (claim_id, comment, employee_id, type, creation_date) "+
         "values ("+ claimId +  ", '"+  comment + "', " + authorId + ", " +
         "'comment', '" +  creation_date.toString() + " )";
+
+        db.raw(sql2)
+        .then(function(){
+            if (err){
+                var confirmation = {"message":false}
+                res.json(confirmation)
+            }else{
+                var confirmation = {"message":true}
+                res.json(confirmation)
+            }
+        })
     })
-    .then(function(){
-        if (err){
-            var confirmation = {"message":false}
-            res.json(confirmation)
-        }
-        var confirmation = {"message":true}
-        res.json(confirmation)
-    })
+
 })
 
 router.post('/rejectOffset',function(req,res,next){
@@ -66,15 +70,19 @@ router.post('/rejectOffset',function(req,res,next){
         var sql2 = "insert into event (claim_id, comment, employee_id, type, creation_date) "+
         "values ("+ claimId +  ", '"+  comment + "', " + authorId + ", " +
         "'comment', '" +  creation_date.toString() + " )";
+
+        db.raw(sql2)
+        .then(function(){
+            if (err){
+                var confirmation = {"message":false}
+                res.json(confirmation)
+            } else {
+                var confirmation = {"message":true}
+                res.json(confirmation)
+            }
+        })
     })
-    .then(function(){
-        if (err){
-            var confirmation = {"message":false}
-            res.json(confirmation)
-        }
-        var confirmation = {"message":true}
-        res.json(confirmation)
-    })
+
 })
 
 

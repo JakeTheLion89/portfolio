@@ -76,16 +76,17 @@ router.post('/createRefund',function(req,res,err){
         var sql2 = "insert into event (claim_id, comment, employee_id, type, creation_date) "+
         "values ("+ claimId +  ", '"+  comment + "', " + authorId + ", " +
         "'comment', '" +  creation_date.toString() + " )";
+        db.raw(sql2)
+        .then(function(){
+            if (err){
+                var confirmation = {"message":false}
+                res.json(confirmation)
+            } else {
+                var confirmation = {"message":true}
+                res.json(confirmation)
+            }
+        })
     })
-    .then(function(){
-        if (err){
-            var confirmation = {"message":false}
-            res.json(confirmation)
-        }
-        var confirmation = {"message":true}
-        res.json(confirmation)
-    })
-
 })
 
 router.post('/createOffset',function(req,res,err){
@@ -93,7 +94,7 @@ router.post('/createOffset',function(req,res,err){
     var claimStatus = req.body.claimStatus;
     var authorId = req.body.employeeId;
     var creationDate = moment().utc().format("YYYY-MM-DD hh:mm:ss")
-    
+
     var sql1 = "update claim set refund_type = '" + claimStatus +
                "', status = 'awaiting offset approval' "
               " where id = " + claimId
@@ -106,15 +107,18 @@ router.post('/createOffset',function(req,res,err){
         var sql2 = "insert into event (claim_id, comment, employee_id, type, creation_date) "+
         "values ("+ claimId +  ", '"+  comment + "', " + authorId + ", " +
         "'comment', '" +  creation_date.toString() + " )";
+        db.raw(sql2)
+        .then(function(){
+            if (err){
+                var confirmation = {"message":false}
+                res.json(confirmation)
+            } else {
+                var confirmation = {"message":true}
+                res.json(confirmation)
+            }
+        })
     })
-    .then(function(){
-        if (err){
-            var confirmation = {"message":false}
-            res.json(confirmation)
-        }
-        var confirmation = {"message":true}
-        res.json(confirmation)
-    })
+
 })
 
 
