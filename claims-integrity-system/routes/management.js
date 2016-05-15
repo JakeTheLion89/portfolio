@@ -39,7 +39,7 @@ router.post('/approveOffset',function(req,res,next){
 
         var sql2 = "insert into event (claim_id, comment, employee_id, type, creation_date) "+
         "values ("+ claimId +  ", '"+  comment + "', " + authorId + ", " +
-        "'comment', '" +  creation_date.toString() );
+        "'comment', '" +  creation_date.toString() + " )"  );
     })
     .then(function(){
         if (err){
@@ -63,7 +63,7 @@ router.post('/rejectOffset',function(req,res,next){
 
         var sql2 = "insert into event (claim_id, comment, employee_id, type, creation_date) "+
         "values ("+ claimId +  ", '"+  comment + "', " + authorId + ", " +
-        "'comment', '" +  creation_date.toString() );
+        "'comment', '" +  creation_date.toString() + " )"  );
     })
     .then(function(){
         if (err){
