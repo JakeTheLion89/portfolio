@@ -102,8 +102,7 @@ router.post('/createOffset',function(req,res,err){
               " where id = " + claimId
 
     db.raw(sql1)
-    .then(function(err){
-        if (err) res.render(err);
+    .then(function(){
         var creationDate = moment().utc().format("YYYY-MM-DD hh:mm:ss")
         var comment = "Offset request sent for approval."
 
