@@ -94,7 +94,7 @@ router.post('/createOffset',function(req,res,err){
     var authorId = req.body.employeeId;
 
     var sql1 = "update claim set refund_type = '" + claimStatus +
-               "'', status = 'awaiting offset approval' "
+               "', status = 'awaiting offset approval' "
               " where id = " + claimId
 
     db.raw(sql1)
