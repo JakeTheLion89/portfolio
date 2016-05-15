@@ -227,7 +227,8 @@ function postComment(claimId){
 
     xhttp.onreadystatechange = function() {
         if (xhttp.readyState == 4 && xhttp.status == 200){
-            getClaimEvents(claimId);
+			getClaimEvents(claimId);
+			$('#mask, .window').hide();
         }
     };
 
@@ -283,6 +284,9 @@ function createRefund(claimId){
     xhttp.onreadystatechange = function(){
         if (xhttp.readyState == 4 && xhttp.status == 200){
             // do reaction stuff here
+			console.log(xhttp.responseText)
+			getClaimEvents(claimId);
+			$('#mask, .window').hide();
         }
     }
     xhttp.open("POST", apiUrl + ":13000/analysts/createRefund", true);
@@ -290,15 +294,21 @@ function createRefund(claimId){
     xhttp.setRequestHeader("Access-Control-Allow-Origin","*");
 
     var refundAmt = document.getElementById('refund-form').elements['refund-amt'].value
-
+	var refundOwed =
     var table = document.getElementById('claimInfoTable').rows
     var empId = table[3].cells[1].innerHTML
+	console.log(parseInt(refundAmt))
+	if (isNaN(parseInt(refundAmt))){
+		document.getElementById('refund-form').elements['refund-amt'].value = "Enter a valid number"
+		return
+	}
 
     var jsonData = {
         'claimId': claimId,
         'refundAmt' : refundAmt,
         'claimStatus' : "",
-        'authorId' : empId,
+        'employeeId' : empId,
+		'refundOwed' : refundOwed
     }
 
     console.log(["testing", jsonData])
@@ -336,4 +346,8 @@ function createOffset(claimId){
 
     xhttp.send(JSON.stringify(jsonData));
 
+}
+
+function clearOnClick(){
+	document.getElementById('refund-form').elements['refund-amt'].value = ''
 }
