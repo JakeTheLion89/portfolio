@@ -67,6 +67,7 @@ router.post('/createRefund',function(req,res,err){
                ", status = 'refunded' " +
               " where id = " + claimId
 
+    console.log(sql1)
     db.raw(sql1)
     // then put in an event
     .then(function(err){
