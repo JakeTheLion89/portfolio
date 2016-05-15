@@ -69,8 +69,8 @@ router.post('/createRefund',function(req,res,err){
 
     db.raw(sql1)
     // then put in an event
-    .then(function(){
-
+    .then(function(err){
+        if (err) console.log(err);
         var comment = "Refund of $" + refundAmt + " submitted";
 
         var sql2 = "insert into event (claim_id, comment, employee_id, type, creation_date) "+
@@ -101,8 +101,8 @@ router.post('/createOffset',function(req,res,err){
               " where id = " + claimId
 
     db.raw(sql1)
-    .then(function(){
-
+    .then(function(err){
+        if (err) console.log(err)
         var comment = "Offset request sent for approval."
 
         var sql2 = "insert into event (claim_id, comment, employee_id, type, creation_date) "+

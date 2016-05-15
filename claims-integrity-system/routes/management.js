@@ -36,6 +36,7 @@ router.post('/approveOffset',function(req,res,next){
                 'where id = ' + claimId;
     db.raw(sql)
     .then(function(){
+        if (err) console.log(err)
         var comment = "Offset Approved"
 
         var sql2 = "insert into event (claim_id, comment, employee_id, type, creation_date) "+
@@ -66,6 +67,7 @@ router.post('/rejectOffset',function(req,res,next){
                 'where id = ' + claimId;
     db.raw(sql)
     .then(function(){
+        if (err) console.log(err)
         var comment = "Offset rejected"
 
         var sql2 = "insert into event (claim_id, comment, employee_id, type, creation_date) "+
