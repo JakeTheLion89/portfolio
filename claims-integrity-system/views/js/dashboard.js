@@ -286,6 +286,7 @@ function createRefund(claimId){
             // do reaction stuff here
 			console.log(xhttp.responseText)
 			getClaimEvents(claimId);
+			getClaimInfo(claimId);
 			$('#mask, .window').hide();
         }
     }
