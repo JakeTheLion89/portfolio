@@ -30,6 +30,7 @@ router.post('/assignClaimToAnalyst', function(req,res,next){
 router.post('/approveOffset',function(req,res,next){
     var claimId = req.body.claimId;
     var authorId = req.body.employeeId;
+    var creationDate = moment().utc().format("YYYY-MM-DD hh:mm:ss")
 
     var sql = "update claim set status = 'completed', refund_type = 'offset'"
                 'where id = ' + claimId;
@@ -54,6 +55,7 @@ router.post('/approveOffset',function(req,res,next){
 router.post('/rejectOffset',function(req,res,next){
     var claimId = req.body.claimId;
     var authorId = req.body.employeeId;
+    var creationDate = moment().utc().format("YYYY-MM-DD hh:mm:ss")
 
     var sql = "update claim set status = 'active'"
                 'where id = ' + claimId;

@@ -92,7 +92,8 @@ router.post('/createOffset',function(req,res,err){
     var claimId = req.body.claimId;
     var claimStatus = req.body.claimStatus;
     var authorId = req.body.employeeId;
-
+    var creationDate = moment().utc().format("YYYY-MM-DD hh:mm:ss")
+    
     var sql1 = "update claim set refund_type = '" + claimStatus +
                "', status = 'awaiting offset approval' "
               " where id = " + claimId
