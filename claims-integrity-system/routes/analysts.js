@@ -65,7 +65,7 @@ router.post('/createRefund',function(req,res,err){
     var sql1 = "update claim set amount_to_be_recovered = 0"
                ", refund_type = 'refund' " +
                ", status = 'refunded' " +
-              "' where id = " + claimId
+              " where id = " + claimId
 
     db.raw(sql1)
     // then put in an event
