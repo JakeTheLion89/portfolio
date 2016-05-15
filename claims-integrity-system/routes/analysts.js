@@ -117,6 +117,7 @@ router.post('/createOffset',function(req,res,err){
                 res.json(confirmation)
             } else {
                 var confirmation = {"message":true}
+                console.log(confirmation)
                 res.json(confirmation)
             }
         })
