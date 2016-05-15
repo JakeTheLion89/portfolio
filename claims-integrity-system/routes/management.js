@@ -39,7 +39,7 @@ router.post('/approveOffset',function(req,res,next){
     .then(function(){
         if (err) console.log(err)
         var comment = "Offset Approved"
-
+        var creationDate = moment().utc().format("YYYY-MM-DD hh:mm:ss")
         var sql2 = "insert into event (claim_id, comment, employee_id, type, creation_date) "+
         "values ("+ claimId +  ", '"+  comment + "', " + authorId + ", " +
         "'comment', '" +  creation_date.toString() + " )";
@@ -70,6 +70,7 @@ router.post('/rejectOffset',function(req,res,next){
     .then(function(){
         if (err) console.log(err)
         var comment = "Offset rejected"
+        var creationDate = moment().utc().format("YYYY-MM-DD hh:mm:ss")
 
         var sql2 = "insert into event (claim_id, comment, employee_id, type, creation_date) "+
         "values ("+ claimId +  ", '"+  comment + "', " + authorId + ", " +
