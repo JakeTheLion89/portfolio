@@ -46,9 +46,8 @@ router.post('/approveOffset',function(req,res,next){
 
         db.raw(sql2)
         .then(function(){
-                var confirmation = {"message":true}
-                res.json(confirmation)
-            }
+            var confirmation = {"message":true}
+            res.json(confirmation)
         })
     })
 
@@ -72,9 +71,8 @@ router.post('/rejectOffset',function(req,res,next){
 
         db.raw(sql2)
         .then(function(err){
-                var confirmation = {"message":true}
-                res.json(confirmation)
-            }
+            var confirmation = {"message":true}
+            res.json(confirmation)
         })
     })
 

@@ -79,14 +79,8 @@ router.post('/createRefund',function(req,res,err){
         "'comment', '" +  creationDate.toString() + " ')";
         db.raw(sql2)
         .then(function(){
-            if (err){
-                console.log(err)
-                var confirmation = {"message":err}
-                res.json(confirmation)
-            } else {
-                var confirmation = {"message":true}
-                res.json(confirmation)
-            }
+            var confirmation = {"message":true}
+            res.json(confirmation)
         })
     })
 })
@@ -110,16 +104,10 @@ router.post('/createOffset',function(req,res,err){
         "values ("+ claimId +  ", '"+  comment + "', " + authorId + ", " +
         "'comment', '" +  creationDate.toString() + "' )";
         db.raw(sql2)
-        .then(function(err){
-            if (err){
-                var confirmation = {"message":err}
-                console.log(confirmation)
-                res.json(confirmation)
-            } else {
-                var confirmation = {"message":true}
-                console.log(confirmation)
-                res.json(confirmation)
-            }
+        .then(function(){
+            var confirmation = {"message":true}
+            console.log(confirmation)
+            res.json(confirmation)
         })
     })
 
