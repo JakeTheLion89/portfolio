@@ -102,7 +102,7 @@ router.post('/createOffset',function(req,res,err){
 
     db.raw(sql1)
     .then(function(err){
-        if (err) res.json(err);
+        if (err) res.render(err);
         var comment = "Offset request sent for approval."
 
         var sql2 = "insert into event (claim_id, comment, employee_id, type, creation_date) "+
