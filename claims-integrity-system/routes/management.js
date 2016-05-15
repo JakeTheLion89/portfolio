@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var db = require('../db_config.js')
+var moment = require('moment')
 
 router.get('/getAllClaims', function(req, res, next) {
     var sql = 'select * from claim';
