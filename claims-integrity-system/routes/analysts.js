@@ -79,6 +79,7 @@ router.post('/createRefund',function(req,res,err){
         db.raw(sql2)
         .then(function(){
             if (err){
+                console.log(err)
                 var confirmation = {"message":false}
                 res.json(confirmation)
             } else {
@@ -110,6 +111,7 @@ router.post('/createOffset',function(req,res,err){
         db.raw(sql2)
         .then(function(){
             if (err){
+                console.log(err)
                 var confirmation = {"message":false}
                 res.json(confirmation)
             } else {
