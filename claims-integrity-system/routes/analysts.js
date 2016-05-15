@@ -110,10 +110,10 @@ router.post('/createOffset',function(req,res,err){
         "values ("+ claimId +  ", '"+  comment + "', " + authorId + ", " +
         "'comment', '" +  creationDate.toString() + "' )";
         db.raw(sql2)
-        .then(function(){
+        .then(function(err){
             if (err){
-                console.log(err)
                 var confirmation = {"message":err}
+                console.log(confirmation)
                 res.json(confirmation)
             } else {
                 var confirmation = {"message":true}
