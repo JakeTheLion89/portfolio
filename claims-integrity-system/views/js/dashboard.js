@@ -13,7 +13,7 @@ $(document).ready(function() {
         var refundHeader = document.getElementById('Refund-Head')
         var refundButton = document.getElementById('refund-submit')
         var table = document.getElementById('claimInfoTable').rows
-        refundHeader.innerHTML = "Make Refund"
+        refundHeader.innerHTML = "Make Refund | Claim ID: "+ table[0].cells[1].innerHTML +"|Amount Owed: " + table[table.length-5].cells[1].innerHTML
 
         refundButton.setAttribute('onclick','createRefund(' + table[0].cells[1].innerHTML +')')
 		//Set height and width to mask to fill up the whole screen
@@ -293,22 +293,16 @@ function createRefund(claimId){
     xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xhttp.setRequestHeader("Access-Control-Allow-Origin","*");
 
-    var refundAmt = document.getElementById('refund-form').elements['refund-amt'].value
-	var refundOwed =
     var table = document.getElementById('claimInfoTable').rows
+		var refundAmt = table[table.length-5].cells[1].innerHTML
     var empId = table[3].cells[1].innerHTML
-	console.log(parseInt(refundAmt))
-	if (isNaN(parseInt(refundAmt))){
-		document.getElementById('refund-form').elements['refund-amt'].value = "Enter a valid number"
-		return
-	}
 
     var jsonData = {
         'claimId': claimId,
         'refundAmt' : refundAmt,
-        'claimStatus' : "",
+        'claimStatus' : "refund",
         'employeeId' : empId,
-		'refundOwed' : refundOwed
+//		'refundOwed' : refundOwed
     }
 
     console.log(["testing", jsonData])
@@ -324,14 +318,13 @@ function createOffset(claimId){
             // do reaction stuff here
 			console.log(xhttp.responseText);
 			getClaimEvents(claimId);
+			getClaimInfo(claimId);
 			$('#mask, .window').hide();
         }
     }
     xhttp.open("POST", apiUrl + ":13000/analysts/createOffset", true);
     xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xhttp.setRequestHeader("Access-Control-Allow-Origin","*");
-
-    var refundAmt = document.getElementById('refund-form').elements['refund-amt']
 
     var table = document.getElementById('claimInfoTable').rows
     var empId = table[3].cells[1].innerHTML

@@ -65,7 +65,7 @@ router.post('/createRefund',function(req,res,err){
 
     // first update the claim on how much is still owed
     var sql1 = "update claim set amount_to_be_recovered = 0"
-               ", refund_type = '" + claimStatus +
+               ", refund_type = 'refund'" +
               "' where id = " + claimId
 
     db.raw(sql1)
