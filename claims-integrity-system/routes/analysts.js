@@ -62,7 +62,7 @@ router.post('/createRefund',function(req,res,err){
     var creationDate = moment().utc().format("YYYY-MM-DD hh:mm:ss")
 
     // first update the claim on how much is still owed
-    var sql1 = "update claim set amount_to_be_recovered = 0"
+    var sql1 = "update claim set amount_to_be_recovered = 0" +
                ", refund_type = 'refund' " +
                ", status = 'refunded' " +
               " where id = " + claimId
