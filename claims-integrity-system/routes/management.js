@@ -47,7 +47,7 @@ router.post('/approveOffset',function(req,res,next){
         .then(function(){
             if (err){
                 console.log(err)
-                var confirmation = {"message":false}
+                var confirmation = {"message":err}
                 res.json(confirmation)
             }else{
                 var confirmation = {"message":true}
@@ -75,10 +75,10 @@ router.post('/rejectOffset',function(req,res,next){
         "'comment', '" +  creation_date.toString() + " )";
 
         db.raw(sql2)
-        .then(function(){
+        .then(function(err){
             if (err){
                 console.log(err)
-                var confirmation = {"message":false}
+                var confirmation = {"message":err}
                 res.json(confirmation)
             } else {
                 var confirmation = {"message":true}

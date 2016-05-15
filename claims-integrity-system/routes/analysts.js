@@ -80,7 +80,7 @@ router.post('/createRefund',function(req,res,err){
         .then(function(){
             if (err){
                 console.log(err)
-                var confirmation = {"message":false}
+                var confirmation = {"message":err}
                 res.json(confirmation)
             } else {
                 var confirmation = {"message":true}
@@ -102,7 +102,7 @@ router.post('/createOffset',function(req,res,err){
 
     db.raw(sql1)
     .then(function(err){
-        if (err) console.log(err)
+        if (err)console.log(err);
         var comment = "Offset request sent for approval."
 
         var sql2 = "insert into event (claim_id, comment, employee_id, type, creation_date) "+
@@ -112,7 +112,7 @@ router.post('/createOffset',function(req,res,err){
         .then(function(){
             if (err){
                 console.log(err)
-                var confirmation = {"message":false}
+                var confirmation = {"message":err}
                 res.json(confirmation)
             } else {
                 var confirmation = {"message":true}
