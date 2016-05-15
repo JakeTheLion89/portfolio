@@ -70,13 +70,16 @@ router.post('/createRefund',function(req,res,err){
     db.raw(sql1)
     // then put in an event
     .then(function(){
-        var sql2 = "insert into event (claim_id, comment, employee_id, type, creation_date, event_obj) "+
+
+        var comment = "Refund of $" + refundAmt + " submitted";
+
+        var sql2 = "insert into event (claim_id, comment, employee_id, type, creation_date) "+
         "values ("+ claimId +  ", '"+  comment + "', " + authorId + ", " +
-        "'comment', '" +  creation_date.toString() + "'," + refundObj + " )")
+        "'comment', '" +  creation_date.toString() );
     })
     .then(function(){
         if (err){
-            var confirmation = {"message":true}
+            var confirmation = {"message":false}
             res.json(confirmation)
         }
         var confirmation = {"message":true}
@@ -89,7 +92,28 @@ router.post('/createOffset',function(req,res,err){
     var claimId = req.body.claimId;
     var claimStatus = req.body.claimStatus;
     var authorId = req.body.employeeId;
-     // work on this more latere
+
+    var sql1 = "update claim set refund_type = " + claimStatus +
+               ", status = 'awaiting offset approval' "
+              " where id = " + claimId
+
+    db.raw(sql1)
+    .then(function(){
+
+        var comment = "Offset request sent for approval."
+
+        var sql2 = "insert into event (claim_id, comment, employee_id, type, creation_date) "+
+        "values ("+ claimId +  ", '"+  comment + "', " + authorId + ", " +
+        "'comment', '" +  creation_date.toString() );
+    })
+    .then(function(){
+        if (err){
+            var confirmation = {"message":false}
+            res.json(confirmation)
+        }
+        var confirmation = {"message":true}
+        res.json(confirmation)
+    })
 })
 
 

@@ -326,7 +326,7 @@ function createOffset(claimId){
 
     var jsonData = {
         'claimId': claimId,
-        'claimStatus' : "offset"
+        'claimStatus' : "offset",
         'employeeId' : empId
     }
 

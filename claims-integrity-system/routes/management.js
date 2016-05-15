@@ -27,4 +27,53 @@ router.post('/assignClaimToAnalyst', function(req,res,next){
     });
 })
 
+router.post('/approveOffset',function(req,res,next){
+    var claimId = req.body.claimId;
+    var authorId = req.body.employeeId;
+
+    var sql = "update claim set status = 'completed', refund_type = 'offset'"
+                'where id = ' + claimId;
+    db.raw(sql)
+    .then(function(){
+        var comment = "Offset Approved"
+
+        var sql2 = "insert into event (claim_id, comment, employee_id, type, creation_date) "+
+        "values ("+ claimId +  ", '"+  comment + "', " + authorId + ", " +
+        "'comment', '" +  creation_date.toString() );
+    })
+    .then(function(){
+        if (err){
+            var confirmation = {"message":false}
+            res.json(confirmation)
+        }
+        var confirmation = {"message":true}
+        res.json(confirmation)
+    })
+})
+
+router.post('/rejectOffset',function(req,res,next){
+    var claimId = req.body.claimId;
+    var authorId = req.body.employeeId;
+
+    var sql = "update claim set status = 'active'"
+                'where id = ' + claimId;
+    db.raw(sql)
+    .then(function(){
+        var comment = "Offset rejected"
+
+        var sql2 = "insert into event (claim_id, comment, employee_id, type, creation_date) "+
+        "values ("+ claimId +  ", '"+  comment + "', " + authorId + ", " +
+        "'comment', '" +  creation_date.toString() );
+    })
+    .then(function(){
+        if (err){
+            var confirmation = {"message":false}
+            res.json(confirmation)
+        }
+        var confirmation = {"message":true}
+        res.json(confirmation)
+    })
+})
+
+
 module.exports = router;
