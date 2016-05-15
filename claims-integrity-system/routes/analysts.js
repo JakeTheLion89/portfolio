@@ -76,7 +76,7 @@ router.post('/createRefund',function(req,res,err){
 
         var sql2 = "insert into event (claim_id, comment, employee_id, type, creation_date) "+
         "values ("+ claimId +  ", '"+  comment + "', " + authorId + ", " +
-        "'comment', '" +  creation_date.toString() + " )";
+        "'comment', '" +  creationDate.toString() + " )";
         db.raw(sql2)
         .then(function(){
             if (err){
@@ -109,7 +109,7 @@ router.post('/createOffset',function(req,res,err){
 
         var sql2 = "insert into event (claim_id, comment, employee_id, type, creation_date) "+
         "values ("+ claimId +  ", '"+  comment + "', " + authorId + ", " +
-        "'comment', '" +  creation_date.toString() + " )";
+        "'comment', '" +  creationDate.toString() + " )";
         db.raw(sql2)
         .then(function(){
             if (err){
