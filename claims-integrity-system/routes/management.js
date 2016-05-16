@@ -65,7 +65,7 @@ router.post('/approveOffset',function(req,res,next){
 })
 
 router.post('/rejectOffset',function(req,res,next){
-    var claimId = req.body.claimId;
+    var claimId = req.body.claimId.toString();
     var authorId = req.body.employeeId;
     var creationDate = moment().utc().format("YYYY-MM-DD hh:mm:ss")
 
