@@ -15,7 +15,7 @@ router.post('/assignClaimToAnalyst', function(req,res,next){
     console.log(req.body)
     var claimId = req.body.claimId;
     var analystId = req.body.analystId;
-
+    var creationDate = moment().utc().format("YYYY-MM-DD hh:mm:ss")
     var sql = 'update claim set analyst_employee_id = ' + analystId +
               'where id = ' + claimId;
 

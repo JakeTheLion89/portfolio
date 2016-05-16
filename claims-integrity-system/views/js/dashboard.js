@@ -198,10 +198,12 @@ function getClaimEvents(claimId){
                 entry.setAttribute("class", "list-group-item");
                 var commenterId = document.createTextNode("CommenterID:"+ eventData[i].employee_id);
                 var comment = document.createTextNode("Comment:" + eventData[i].comment);
-
+				var timestamp = document.createTextNode("Comment:" + eventData[i].creation_date);
                 entry.appendChild(commenterId);
                 entry.appendChild(document.createElement("br"));
                 entry.appendChild(comment);
+				entry.appendChild(document.createElement("br"));
+				entry.appendChild(timestamp)
                 groupOfEvents.appendChild(entry);
             }
         };
