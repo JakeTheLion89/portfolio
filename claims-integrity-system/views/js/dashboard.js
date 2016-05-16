@@ -13,7 +13,7 @@ $(document).ready(function() {
         var refundHeader = document.getElementById('Refund-Head')
         var refundButton = document.getElementById('refund-submit')
         var table = document.getElementById('claimInfoTable').rows
-        refundHeader.innerHTML = "Make Refund | Claim ID: "+ table[0].cells[1].innerHTML +"|Amount Owed: " + table[table.length-15].cells[1].innerHTML
+        refundHeader.innerHTML = "Make Refund | Claim ID: "+ table[0].cells[1].innerHTML +"|Amount Owed: $" + table[table.length-15].cells[1].innerHTML
 
         refundButton.setAttribute('onclick','createRefund(' + table[0].cells[1].innerHTML +')')
 		//Set height and width to mask to fill up the whole screen
@@ -63,7 +63,7 @@ $(document).ready(function() {
         var offsetButton = document.getElementById('offset-submit')
         var table = document.getElementById('claimInfoTable').rows
 
-        offsetHeader.innerHTML = "Make Offset | Claim ID: "+ table[0].cells[1].innerHTML +"|Amount Owed: " + table[table.length-15].cells[1].innerHTML
+        offsetHeader.innerHTML = "Make Offset | Claim ID: "+ table[0].cells[1].innerHTML +"|Amount Owed: $" + table[table.length-15].cells[1].innerHTML
 
         offsetButton.setAttribute('onclick','createOffset('+ table[0].cells[1].innerHTML + ')')
 
@@ -101,7 +101,7 @@ $(document).ready(function() {
 		var rejectButton = document.getElementById('reject-submit')
         var table = document.getElementById('claimInfoTable').rows
 
-        approvalHeader.innerHTML = "Offset Approval | Claim ID: "+ table[0].cells[1].innerHTML +"|Amount Owed: " + table[table.length-15].cells[1].innerHTML
+        approvalHeader.innerHTML = "Offset Approval | Claim ID: "+ table[0].cells[1].innerHTML +"|Amount Owed: $" + table[table.length-15].cells[1].innerHTML
 
         approveButton.setAttribute('onclick','approveOffset('+ table[0].cells[1].innerHTML + ')')
 		rejectButton.setAttribute('onclick','rejectOffset('+ table[0].cells[1].innerHTML + ')')
