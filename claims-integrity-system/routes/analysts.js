@@ -88,7 +88,7 @@ router.post('/createOffset',function(req,res,err){
     var creationDate = moment().utc().format("YYYY-MM-DD hh:mm:ss")
 
     var sql1 = "update claim set refund_type = '" + claimStatus +
-               "', status = 'awaiting offset approval' "
+               "', status = 'awaiting offset approval' " +
               " where id = " + claimId
 
     db.raw(sql1)

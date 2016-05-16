@@ -424,10 +424,11 @@ function approveOffset(claimId){
 	};
 
 	var jsonData = {
-		claimId : claimId,
-		employeeId : "1"  //because the manager is doing this
+		'claimId' : claimId,
+		'employeeId' : "1"  //because the manager is doing this
 	}
-
+	
+	console.log(jsonData)
 	xhttp.open("POST", apiUrl + ":13000/management/approveOffset", true);
 	xhttp.send(JSON.stringify(jsonData))
 }
