@@ -1,0 +1,49 @@
+<html>
+
+<title>Claims Integrity System Login</title>
+
+<head>
+
+<style type="text/css">
+
+form { border-style: groove; border-width: 1px; border-color: Blue; width: 240px; padding: 25px; background-color: Aqua; } width: 230px; color: White; background: Blue; margin-bottom: 5px; }
+input.submit { width: 80px; color: Black; background-color: White; border-style: dotted; border-width: 2px; border-color: Blue; margin-top: 15px; }
+</style>
+
+
+
+</head>
+
+<body>
+
+<form>
+    <label>Username:</label>
+    <input id="user" type="text" value="" />
+    <label>Password:</label>
+    <input id="pwd" type="password" value="" />
+    <button type="button", onclick=login() value="login" />Login</button>
+</form>
+
+</body>
+<script>
+
+function login(){
+
+    var subUsername = document.getElementById('user').value
+    var subPwd = document.getElementById('pwd').value
+
+    if (subUsername === 'pkettering' && subPwd === 'password123'){
+        window.location.href = "http://ec2-54-83-174-170.compute-1.amazonaws.com/manager"
+    }
+    if (subUsername === 'dsmith' && subPwd === 'password123'){
+        console.log("analyst")
+        window.location.href = "http://ec2-54-83-174-170.compute-1.amazonaws.com/manager"
+    }
+
+    return
+
+
+}
+
+</script>
+</html>
