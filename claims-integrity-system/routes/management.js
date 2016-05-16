@@ -21,7 +21,7 @@ router.post('/assignClaimToAnalyst', function(req,res,next){
 
     db.raw(sql).then(function(payload,err){
 
-        var comment = "Claim assigned to Analyst-Id: " + analystId
+        var comment = "Claim assigned to Analyst. Id#: " + analystId
 
         var sql2 = "insert into event (claim_id, comment, employee_id, type, creation_date) "+
         "values ("+ claimId +  ", '"+  comment + "', " + "1" + ", " +
@@ -65,7 +65,7 @@ router.post('/approveOffset',function(req,res,next){
 })
 
 router.post('/rejectOffset',function(req,res,next){
-    var claimId = req.body.claimId.toString();
+    var claimId = req.body.claimId;
     var authorId = req.body.employeeId;
     var creationDate = moment().utc().format("YYYY-MM-DD hh:mm:ss")
 

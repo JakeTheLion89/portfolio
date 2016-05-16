@@ -479,5 +479,7 @@ function rejectOffset(claimId){
 	}
 
 	xhttp.open("POST", apiUrl + ":13000/management/rejectOffset", true);
+    xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xhttp.setRequestHeader("Access-Control-Allow-Origin","*");
 	xhttp.send(JSON.stringify(jsonData))
 }
