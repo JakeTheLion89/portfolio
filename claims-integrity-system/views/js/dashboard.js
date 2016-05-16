@@ -239,11 +239,10 @@ function getClaimInfo(claimId){
 			var filter = [
 				"last_modified_date",
 				"last_modified_field",
-				"amount_to_be_recovered",
+			//	"amount_to_be_recovered",
 				"par_np",
 				"provider_id",
 				"employee_claim",
-				"balance_owed"
 			]
 
             for(var i = 0; i < cKeys.length; i++){
