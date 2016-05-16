@@ -36,7 +36,6 @@
             <li><a href="#">Manager</a></li>
             <li><a href="#">Claims Assignments</a></li>
             <li><a href="#">Offsets</a></a></li>
-            <li><a href="#">Analysts</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -50,13 +49,13 @@
           <div class=col-sm-4 id=small-col>
               <h2>Claim information</h2>
               <form class="form-inline" role="form">
-                  <div class="form-group">
-                      <label for="employee-id">Assign claim (enter EmpID)</label>
-                      <input  style="width:50px" type="employee-id" class="form-control" id="assigned-analyst-id">
-                  </div>
+                  <select id="emp-select"class="c-select">
+                      <option selected>Assign to an Analyst</option>
+                      <option value="1">Patrick Kettering</option>
+                      <option value="2">Daniel Smith</option>
+                  </select>
                   <button id='assign-claim-button' type="button" class="btn btn-default">Submit</button>
               </form>
-              <button id='edit-claim' type="button" class="btn btn-default">Edit claim</button>
               <div id="claim-info"></div>
           </div>
           <div class=col-sm-4 id=small-col>

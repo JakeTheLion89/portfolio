@@ -78,25 +78,52 @@ function getClaimInfo(claimId){
             table.setAttribute('id','claimInfoTable');
             document.getElementById('claim-info').appendChild(table)
             var claim = claimData.claim;
-            console.log(claim)
+			var providerData = claimData.provider;
             //var keys = Object.keys(claimData)
-            var keys = [];
+            var cKeys = [];
+			var pKeys = [];
 
-            for(var k in claim) keys.push(k);
-            console.log(keys)
+            for(var k in claim) cKeys.push(k);
+			for(var i in providerData) pKeys.push(i);
 
-            for(var i = 0; i < keys.length; i++){
-                var row = document.createElement('tr');
-                table.appendChild(row)
-                var cell1 = document.createElement('td');
-                cell1.innerHTML = keys[i]
-                row.appendChild(cell1);
-                var cell2 = document.createElement('td');
-                cell2.innerHTML = claim[keys[i]]
-                row.appendChild(cell2);
+			var filter = [
+				"last_modified_date",
+				"last_modified_field",
+				"amount_to_be_recovered",
+				"par_np",
+				"project_id",
+				"provider_id",
+				"employee_claim",
+				"analyst_employee_id",
+				"balance_owed"
+			]
+
+            for(var i = 0; i < cKeys.length; i++){
+				if (filter.indexOf(cKeys[i])){
+	                var row = document.createElement('tr');
+	                table.appendChild(row)
+	                var cell1 = document.createElement('td');
+	                cell1.innerHTML = cKeys[i]
+	                row.appendChild(cell1);
+	                var cell2 = document.createElement('td');
+	                cell2.innerHTML = claim[cKeys[i]]
+	                row.appendChild(cell2);
+				}
+            };
+
+            for(var i = 0; i < pKeys.length; i++){
+				if (filter.indexOf(pKeys[i])){
+	                var row = document.createElement('tr');
+	                table.appendChild(row)
+	                var cell1 = document.createElement('td');
+	                cell1.innerHTML = "provider_" + pKeys[i]
+	                row.appendChild(cell1);
+	                var cell2 = document.createElement('td');
+	                cell2.innerHTML = providerData[pKeys[i]]
+	                row.appendChild(cell2);
+				}
             };
             getClaimEvents(claimId)
-
             var commentButton = document.getElementById('comment-poster');
             var deleteButton = document.getElementById('comment-deleter')
             var assignClaimButton = document.getElementById('assign-claim-button')
@@ -177,8 +204,8 @@ function assignClaimToAnalyst(claimId){
     xhttp.setRequestHeader("Access-Control-Allow-Origin","*");
 
 
-    var analystId = document.getElementById('assigned-analyst-id').value
-    document.getElementById('assigned-analyst-id').value = ''
+    var analystId = document.getElementById('emp-select').value
+
     var jsonData = {
         'claimId':claimId,
         'analystId':analystId

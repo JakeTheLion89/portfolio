@@ -32,10 +32,9 @@ router.post('/approveOffset',function(req,res,next){
     var claimId = req.body.claimId;
     var authorId = req.body.employeeId;
 
-    console.log(req)
     var creationDate = moment().utc().format("YYYY-MM-DD hh:mm:ss")
 
-    var sql = "update claim set status = 'completed', refund_type = 'offset'" +
+    var sql = "update claim set status = 'completed', refund_type = 'offset' " +
                 'where id = ' + claimId;
     db.raw(sql)
     .then(function(err){
