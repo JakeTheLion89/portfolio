@@ -241,7 +241,6 @@ function getClaimInfo(claimId){
 				"last_modified_field",
 				"amount_to_be_recovered",
 				"par_np",
-				"project_id",
 				"provider_id",
 				"employee_claim",
 				"balance_owed"
