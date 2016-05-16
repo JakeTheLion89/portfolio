@@ -20,11 +20,21 @@ router.post('/assignClaimToAnalyst', function(req,res,next){
               'where id = ' + claimId;
 
     db.raw(sql).then(function(payload,err){
-        if(err){
-            res.json({'message':err});
-        }else{
-            res.json({'message':'success'});
-        };
+
+        var comment = "Claim assiend to Analyst Id: " + claimId
+
+        var sql2 = "insert into event (claim_id, comment, employee_id, type, creation_date) "+
+        "values ("+ claimId +  ", '"+  comment + "', " + "1" + ", " +
+        "'comment', '" +  creationDate.toString() + " ')";
+
+        db.raw(sql2)
+        .then(function(){
+            if(err){
+                res.json({'message':err});
+            }else{
+                res.json({'message':'success'});
+            };
+        })
     });
 })
 
