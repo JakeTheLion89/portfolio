@@ -63,7 +63,7 @@ $(document).ready(function() {
         var offsetButton = document.getElementById('offset-submit')
         var table = document.getElementById('claimInfoTable').rows
 
-        offsetHeader.innerHTML = "Make Offset | Claim ID: "+ table[0].cells[1].innerHTML +"|Amount Owed: " + table[table.length-5].cells[1].innerHTML
+        offsetHeader.innerHTML = "Make Offset | Claim ID: "+ table[0].cells[1].innerHTML +"|Amount Owed: " + table[table.length-15].cells[1].innerHTML
 
         offsetButton.setAttribute('onclick','createOffset('+ table[0].cells[1].innerHTML + ')')
 
