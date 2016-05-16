@@ -31,6 +31,8 @@ router.post('/assignClaimToAnalyst', function(req,res,next){
 router.post('/approveOffset',function(req,res,next){
     var claimId = req.body.claimId;
     var authorId = req.body.employeeId;
+
+    console.log(req.body)
     var creationDate = moment().utc().format("YYYY-MM-DD hh:mm:ss")
 
     var sql = "update claim set status = 'completed', refund_type = 'offset'"

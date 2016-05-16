@@ -57,6 +57,8 @@ $(document).ready(function() {
 		var id = $(this).attr('href');
 
 		//Get the screen height and width
+		var maskHeight = $(document).height();
+		var maskWidth = $(window).width();
         var offsetHeader = document.getElementById('Offset-Head')
         var offsetButton = document.getElementById('offset-submit')
         var table = document.getElementById('claimInfoTable').rows
