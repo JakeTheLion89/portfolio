@@ -11,7 +11,7 @@ router.get('/:role', function(req, res, next) {
        htmlFile = path.join(__dirname, '..', 'views','analystPrototype.html')
    } else if (role == 'loginpage' ){
        htmlFile = path.join(__dirname, '..', 'views','login.html')
-   } else if (role == 'manageOffsets')
+   } else if (role == 'offsets')
        htmlFile = path.join(__dirname, '..', 'views','manageOffsets.html')
 
    res.sendFile(htmlFile)
