@@ -96,7 +96,6 @@ function getClaimInfo(claimId){
 				"project_id",
 				"provider_id",
 				"employee_claim",
-				"analyst_employee_id",
 				"balance_owed"
 			]
 
