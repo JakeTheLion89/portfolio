@@ -36,7 +36,7 @@ router.post('/approveOffset',function(req,res,next){
     var sql = "update claim set status = 'completed', refund_type = 'offset'"
                 'where id = ' + claimId;
     db.raw(sql)
-    .then(function(){
+    .then(function(err){
         if (err) console.log(err)
         var comment = "Offset Approved"
 
@@ -61,7 +61,7 @@ router.post('/rejectOffset',function(req,res,next){
     var sql = "update claim set status = 'active'"
                 'where id = ' + claimId;
     db.raw(sql)
-    .then(function(){
+    .then(function(err){
         if (err) console.log(err)
         var comment = "Offset rejected"
 

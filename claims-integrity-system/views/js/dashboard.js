@@ -57,17 +57,14 @@ $(document).ready(function() {
 		var id = $(this).attr('href');
 
 		//Get the screen height and width
-		var maskHeight = $(document).height();
-		var maskWidth = $(window).width();
-        var approvalHeader = document.getElementById('approval-head')
-        var approveButton = document.getElementById('approval-submit')
-		var rejectButton = document.getElementById('reject-submit')
+        var offsetHeader = document.getElementById('Offset-Head')
+        var offsetButton = document.getElementById('offset-submit')
         var table = document.getElementById('claimInfoTable').rows
 
-        approvalHeader.innerHTML = "Offset Approval | Claim ID: "+ table[0].cells[1].innerHTML +"|Amount Owed: " + table[table.length-5].cells[1].innerHTML
+        offsetHeader.innerHTML = "Make Offset | Claim ID: "+ table[0].cells[1].innerHTML +"|Amount Owed: " + table[table.length-5].cells[1].innerHTML
 
-        approveButton.setAttribute('onclick','acceptOffset('+ table[0].cells[1].innerHTML + ')')
-		rejectButton.setAttribute('onclick','rejectOffset('+ table[0].cells[1].innerHTML + ')')
+        offsetButton.setAttribute('onclick','createOffset('+ table[0].cells[1].innerHTML + ')')
+
 		//Set height and width to mask to fill up the whole screen
 		$('#mask').css({'width':maskWidth,'height':maskHeight});
 
@@ -96,13 +93,17 @@ $(document).ready(function() {
 		//Get the screen height and width
 		var maskHeight = $(document).height();
 		var maskWidth = $(window).width();
-        var offsetHeader = document.getElementById('Offset-Head')
-        var offsetButton = document.getElementById('offset-submit')
+
+        var approvalHeader = document.getElementById('approval-head')
+        var approveButton = document.getElementById('approval-submit')
+		var rejectButton = document.getElementById('reject-submit')
         var table = document.getElementById('claimInfoTable').rows
 
-        offsetHeader.innerHTML = "Make Offset | Claim ID: "+ table[0].cells[1].innerHTML +"|Amount Owed: " + table[table.length-5].cells[1].innerHTML
+        approvalHeader.innerHTML = "Offset Approval | Claim ID: "+ table[0].cells[1].innerHTML +"|Amount Owed: " + table[table.length-5].cells[1].innerHTML
 
-        offsetButton.setAttribute('onclick','createOffset('+ table[0].cells[1].innerHTML + ')')
+        approveButton.setAttribute('onclick','approveOffset('+ table[0].cells[1].innerHTML + ')')
+		rejectButton.setAttribute('onclick','rejectOffset('+ table[0].cells[1].innerHTML + ')')
+
 		//Set height and width to mask to fill up the whole screen
 		$('#mask').css({'width':maskWidth,'height':maskHeight});
 
@@ -407,4 +408,44 @@ function loadOffsets(){
 	};
 	xhttp.open("GET", apiUrl + ":13000/management/reqOffsetClaims", true);
 	xhttp.send()
+}
+
+function approveOffset(claimId){
+	var xhttp = new XMLHttpRequest();
+ 	xhttp.onreadystatechange = function(){
+		if (xhttp.readyState == 4 && xhttp.status == 200){
+			console.log(xhttp.responseText);
+			getClaimEvents(claimId);
+			getClaimInfo(claimId);
+			$('#mask, .window').hide();
+		}
+	};
+
+	var jsonData = {
+		claimId : claimId,
+		employeeId : "1"  //because the manager is doing this
+	}
+
+	xhttp.open("POST", apiUrl + ":13000/management/approveOffset", true);
+	xhttp.send(JSON.stringify(jsonData))
+}
+
+function rejectOffset(claimId){
+	var xhttp = new XMLHttpRequest();
+ 	xhttp.onreadystatechange = function(){
+		if (xhttp.readyState == 4 && xhttp.status == 200){
+			console.log(xhttp.responseText);
+			getClaimEvents(claimId);
+			getClaimInfo(claimId);
+			$('#mask, .window').hide();
+		}
+	};
+
+	var jsonData = {
+		claimId : claimId,
+		employeeId : "1"  //because the manager is doing this
+	}
+
+	xhttp.open("POST", apiUrl + ":13000/management/rejectOffset", true);
+	xhttp.send(JSON.stringify(jsonData))
 }
