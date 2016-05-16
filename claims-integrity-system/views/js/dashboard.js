@@ -13,7 +13,7 @@ $(document).ready(function() {
         var refundHeader = document.getElementById('Refund-Head')
         var refundButton = document.getElementById('refund-submit')
         var table = document.getElementById('claimInfoTable').rows
-        refundHeader.innerHTML = "Make Refund | Claim ID: "+ table[0].cells[1].innerHTML +"|Amount Owed: " + table[table.length-5].cells[1].innerHTML
+        refundHeader.innerHTML = "Make Refund | Claim ID: "+ table[0].cells[1].innerHTML +"|Amount Owed: " + table[table.length-11].cells[1].innerHTML
 
         refundButton.setAttribute('onclick','createRefund(' + table[0].cells[1].innerHTML +')')
 		//Set height and width to mask to fill up the whole screen
