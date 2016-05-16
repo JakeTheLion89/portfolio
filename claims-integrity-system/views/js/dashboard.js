@@ -361,7 +361,7 @@ function createRefund(claimId){
     xhttp.setRequestHeader("Access-Control-Allow-Origin","*");
 
     var table = document.getElementById('claimInfoTable').rows
-		var refundAmt = table[table.length-5].cells[1].innerHTML
+		var refundAmt = table[table.length-15].cells[1].innerHTML
     var empId = table[3].cells[1].innerHTML
 
     var jsonData = {
