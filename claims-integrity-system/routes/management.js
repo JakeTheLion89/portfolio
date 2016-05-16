@@ -79,7 +79,7 @@ router.post('/rejectOffset',function(req,res,next){
 })
 
 router.get('/reqOffsetClaims', function(res,res,next){
-    var sql = "select * from claim where status = 'waiting offset approval'";
+    var sql = "select * from claim where status = 'awaiting offset approval'";
     db.raw(sql)
     .then(function(payload){
         console.log(payload)
