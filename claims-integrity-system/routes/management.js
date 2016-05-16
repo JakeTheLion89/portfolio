@@ -21,7 +21,7 @@ router.post('/assignClaimToAnalyst', function(req,res,next){
 
     db.raw(sql).then(function(payload,err){
 
-        var comment = "Claim assiend to Analyst Id: " + claimId
+        var comment = "Claim assigned to Analyst-Id: " + analystId
 
         var sql2 = "insert into event (claim_id, comment, employee_id, type, creation_date) "+
         "values ("+ claimId +  ", '"+  comment + "', " + "1" + ", " +
