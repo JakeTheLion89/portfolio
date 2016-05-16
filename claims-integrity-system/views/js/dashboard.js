@@ -243,6 +243,7 @@ function getClaimInfo(claimId){
 				"par_np",
 				"provider_id",
 				"employee_claim",
+				"balance_owed"
 			]
 
             for(var i = 0; i < cKeys.length; i++){
